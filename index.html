@@ -38,7 +38,7 @@
       background-position: center top;
       background-repeat: repeat-y;
       background-size: 50px;
-      opacity: 0.15; /* Sönük arka plan */
+      opacity: 0.15;
     }
 
     /* 2. Katman: Görünmez Tıklama Alanları */
@@ -47,12 +47,13 @@
       display: flex; flex-direction: column; justify-content: center; align-items: center;
     }
 
+    /* BOYUT KÜÇÜLTÜLDÜ: Sadece 1 motifi yakalayacak yükseklik (40px) */
     .nav-item {
-      width: 100%; height: 80px; margin: 15px 0;
+      width: 100%; height: 40px; margin: 20px 0;
       cursor: pointer; text-decoration: none;
     }
 
-    /* 3. Katman: Sihirli Maske (Sadece motifin hatlarından ışık geçirir) */
+    /* 3. Katman: Sihirli Maske */
     .tree-mask {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       -webkit-mask-image: url('hayatagaci.png');
@@ -63,47 +64,61 @@
       mask-position: center top;
       mask-repeat: repeat-y;
       mask-size: 50px;
-      pointer-events: none; /* Tıklamaları engellememesi için */
-      /* İşaretin etrafına hafif bir altın halesi yayar */
+      pointer-events: none;
       filter: drop-shadow(0 0 10px var(--accent-color));
     }
 
-    /* Bu kutu maskenin arkasında hareket eder, böylece sadece ağacın o anki boğumu altın renginde parlar */
+    /* Işık Kutusu (Sadece 1 motifi boyayacak) */
     .glow-box {
       position: absolute; left: 0; width: 100%;
       background-color: var(--accent-color);
       transition: top 0.4s ease, height 0.4s ease;
-      opacity: 0; /* Başlangıçta görünmez, kod ile aktif edilecek */
+      opacity: 0;
     }
 
-    /* İçerik Alanı */
+    /* İçerik Alanı (ORTALAMA İŞLEMİ YAPILDI) */
     main {
-      margin-left: var(--nav-width); padding: 0 80px; height: 100vh;
+      margin-left: var(--nav-width); padding: 0 5%; height: 100vh;
       overflow-y: scroll; scroll-behavior: smooth; flex-grow: 1; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; /* Sayfayı ortalar */
     }
 
     section {
-      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; max-width: 800px;
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; 
+      width: 100%; max-width: 950px; /* Genişletildi */
     }
 
     /* Bölümler Arası Minik Sarmal Rumi Geçişi */
     section:not(:last-child)::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 70px;
-      background-image: url('sarmalrumi.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-      margin: 60px auto 0 auto;
-      opacity: 0.4;
+      content: ''; display: block; width: 50px; height: 70px;
+      background-image: url('sarmalrumi.png'); background-size: contain;
+      background-repeat: no-repeat; background-position: center;
+      margin: 60px auto 0 auto; opacity: 0.4;
       filter: invert(80%) sepia(30%) saturate(300%) hue-rotate(5deg);
+    }
+
+    /* HAKKIMDA KISMI İÇİN İKİ SÜTUNLU YAPI */
+    .hero-container {
+      display: flex; align-items: center; justify-content: space-between; gap: 40px;
+    }
+    .hero-text { flex: 1; }
+    
+    /* Sağ taraftaki boşluğu dolduracak görsel alanı */
+    .hero-visual {
+      width: 250px; height: 250px; min-width: 250px;
+      border-radius: 50%;
+      border: 2px dashed rgba(212, 175, 55, 0.4);
+      display: flex; justify-content: center; align-items: center;
+      color: rgba(255, 255, 255, 0.4); font-size: 0.9rem; text-align: center; padding: 20px;
+      transition: all 0.3s ease;
+    }
+    .hero-visual:hover {
+      background-color: rgba(212, 175, 55, 0.05);
+      border-style: solid;
     }
 
     h1 { font-size: 3.5rem; margin-bottom: 10px; color: var(--accent-color); }
     
-    /* Başlıkların yanındaki Pıtrak (40px) */
     h2 { 
       font-size: 2.2rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); 
       padding-bottom: 10px; display: flex; align-items: center; gap: 16px;
@@ -123,10 +138,11 @@
     .card:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.3); }
     .card h3 { color: #fff; margin-bottom: 10px; }
     
+    .badge-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
     .badge {
-      display: inline-block; padding: 6px 12px; margin: 0 8px 8px 0;
-      background: rgba(212, 175, 55, 0.1); color: var(--accent-color);
-      border-radius: 20px; font-size: 0.9rem; border: 1px solid rgba(212, 175, 55, 0.3); text-decoration: none; transition: 0.3s;
+      padding: 8px 16px; background: rgba(212, 175, 55, 0.1); color: var(--accent-color);
+      border-radius: 20px; font-size: 0.9rem; border: 1px solid rgba(212, 175, 55, 0.3); 
+      text-decoration: none; transition: 0.3s;
     }
     .badge:hover { background: var(--accent-color); color: var(--bg-color); }
   </style>
@@ -135,18 +151,13 @@
 
   <!-- Sol Menü -->
   <nav id="navbar">
-    <!-- Sönük Ağaç Katmanı -->
     <div class="tree-dim"></div>
-    
-    <!-- Tıklanabilir Bağlantılar -->
     <div class="nav-links">
       <a href="#hakkimda" class="nav-item active" title="Hakkımda"></a>
       <a href="#yetenekler" class="nav-item" title="Yetenekler"></a>
       <a href="#projeler" class="nav-item" title="Projeler"></a>
       <a href="#iletisim" class="nav-item" title="İletişim"></a>
     </div>
-
-    <!-- Sihirli Maske ve Işık -->
     <div class="tree-mask">
       <div class="glow-box" id="glowBox"></div>
     </div>
@@ -155,14 +166,22 @@
   <!-- Sağ İçerik -->
   <main>
     <section id="hakkimda">
-      <h1>[İsim Soyisim]</h1>
-      <p style="font-size: 1.5rem; color: #fff;">[Meslek / Unvan]</p>
-      <p>[Buraya kendinden, eğitiminden ve nelerle ilgilendiğinden bahsettiğin kısa bir hakkımda yazısı gelecek.]</p>
+      <div class="hero-container">
+        <div class="hero-text">
+          <h1>[İsim Soyisim]</h1>
+          <p style="font-size: 1.5rem; color: #fff; margin-bottom: 20px;">[Meslek / Unvan]</p>
+          <p>[Buraya kendinden, eğitiminden ve nelerle ilgilendiğinden bahsettiğin kısa bir hakkımda yazısı gelecek. Örneğin eğitim hayatın, analitik projelere olan ilgin vs.]</p>
+        </div>
+        <!-- Sağ taraftaki boşluğu dolduran görsel alanı -->
+        <div class="hero-visual">
+          [Buraya İleride Bir Profil Fotoğrafı veya Minimalist Bir Görsel Gelecek]
+        </div>
+      </div>
     </section>
 
     <section id="yetenekler">
       <h2>Araçlar & İlgi Alanları</h2>
-      <div style="margin-bottom: 20px;">
+      <div class="badge-container">
         <span class="badge">[Yetenek 1]</span>
         <span class="badge">[Yetenek 2]</span>
         <span class="badge">[Yetenek 3]</span>
@@ -186,13 +205,14 @@
     <section id="iletisim">
       <h2>Bana Ulaşın</h2>
       <p>[İletişime geçmek isteyenler için kısa bir çağrı metni.]</p>
-      <a href="#" target="_blank" class="badge">GitHub Profilim</a>
-      <a href="#" target="_blank" class="badge">LinkedIn Profilim</a>
-      <a href="mailto:ornek@mail.com" class="badge">E-posta Gönder</a>
+      <div class="badge-container">
+        <a href="#" target="_blank" class="badge">GitHub Profilim</a>
+        <a href="#" target="_blank" class="badge">LinkedIn Profilim</a>
+        <a href="mailto:ornek@mail.com" class="badge">E-posta Gönder</a>
+      </div>
     </section>
   </main>
 
-  <!-- Scroll Spy Script (Işığı Doğru Motife Taşıyan Kod) -->
   <script>
     const sections = document.querySelectorAll('section');
     const navItems = document.querySelectorAll('.nav-item');
@@ -212,7 +232,6 @@
       navItems.forEach(item => {
         if (item.getAttribute('href') === `#${current}`) {
           item.classList.add('active');
-          /* Sihirli ışığı tam olarak tıklanan alanın arkasına kaydır */
           glowBox.style.top = item.offsetTop + 'px';
           glowBox.style.height = item.offsetHeight + 'px';
           glowBox.style.opacity = '1';
@@ -224,7 +243,6 @@
 
     main.addEventListener('scroll', updateGlow);
     window.addEventListener('resize', updateGlow);
-    /* Sayfa açıldığında ışığı ilk bölüme oturtmak için küçük bir bekleme */
     setTimeout(updateGlow, 100);
   </script>
 </body>
