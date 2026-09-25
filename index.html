@@ -27,57 +27,53 @@
     nav {
       position: fixed; top: 0; left: 0;
       width: var(--nav-width); height: 100vh;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
       z-index: 10;
-      border-right: 1px solid rgba(255, 255, 255, 0.03);
     }
 
-    /* Tüm Ekranı Kaplayan Sönük Hayat Ağacı (Arka Plan) */
-    nav::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    /* 1. Katman: Tüm Ekranı Kaplayan Sönük Hayat Ağacı */
+    .tree-dim {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url('hayatagaci.png');
-      background-repeat: repeat-y;
       background-position: center top;
-      background-size: 50px; 
-      background-attachment: fixed;
-      opacity: 0.25; /* Odaklanılmayan kısımlar soluk kalır */
-      z-index: -1;
-    }
-
-    /* Görünmez Menü Kutucukları (Işığı yakalayan pencereler) */
-    .nav-item {
-      width: 100%; 
-      height: 90px; /* Parlayacak alanın yüksekliği */
-      margin: 5px 0;
-      position: relative;
-      cursor: pointer; 
-      text-decoration: none;
-    }
-
-    /* Sihirli Kısım: Sadece kutucuğun içindeki ağaç parçası renk değiştirip parlar */
-    .nav-item::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('hayatagaci.png');
       background-repeat: repeat-y;
-      background-position: center top;
       background-size: 50px;
-      background-attachment: fixed; /* Arka plandaki ağaçla milimetrik hizalar */
-      opacity: 0;
-      transition: all 0.4s ease;
+      opacity: 0.15; /* Sönük arka plan */
     }
 
-    /* 1. Aşama: O an aktif olan sayfanın sembolü altın rengi olur (Yuvarlak yok, işaret boyanır) */
-    .nav-item.active::before {
-      opacity: 1;
-      filter: invert(75%) sepia(40%) saturate(500%) hue-rotate(5deg) drop-shadow(0 0 3px rgba(212, 175, 55, 0.4));
+    /* 2. Katman: Görünmez Tıklama Alanları */
+    .nav-links {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
     }
 
-    /* 2. Aşama: Üzerine gelince kendi hatları boyunca ekstra güçlü parlar */
-    .nav-item.active:hover::before, .nav-item:hover::before {
-      opacity: 1;
-      filter: invert(75%) sepia(40%) saturate(500%) hue-rotate(5deg) drop-shadow(0 0 15px var(--accent-color)) brightness(1.3);
+    .nav-item {
+      width: 100%; height: 80px; margin: 15px 0;
+      cursor: pointer; text-decoration: none;
+    }
+
+    /* 3. Katman: Sihirli Maske (Sadece motifin hatlarından ışık geçirir) */
+    .tree-mask {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      -webkit-mask-image: url('hayatagaci.png');
+      -webkit-mask-position: center top;
+      -webkit-mask-repeat: repeat-y;
+      -webkit-mask-size: 50px;
+      mask-image: url('hayatagaci.png');
+      mask-position: center top;
+      mask-repeat: repeat-y;
+      mask-size: 50px;
+      pointer-events: none; /* Tıklamaları engellememesi için */
+      /* İşaretin etrafına hafif bir altın halesi yayar */
+      filter: drop-shadow(0 0 10px var(--accent-color));
+    }
+
+    /* Bu kutu maskenin arkasında hareket eder, böylece sadece ağacın o anki boğumu altın renginde parlar */
+    .glow-box {
+      position: absolute; left: 0; width: 100%;
+      background-color: var(--accent-color);
+      transition: top 0.4s ease, height 0.4s ease;
+      opacity: 0; /* Başlangıçta görünmez, kod ile aktif edilecek */
     }
 
     /* İçerik Alanı */
@@ -107,7 +103,7 @@
 
     h1 { font-size: 3.5rem; margin-bottom: 10px; color: var(--accent-color); }
     
-    /* Başlıkların yanındaki Pıtrak (40px boyutunda) */
+    /* Başlıkların yanındaki Pıtrak (40px) */
     h2 { 
       font-size: 2.2rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); 
       padding-bottom: 10px; display: flex; align-items: center; gap: 16px;
@@ -139,10 +135,21 @@
 
   <!-- Sol Menü -->
   <nav id="navbar">
-    <a href="#hakkimda" class="nav-item active" title="Hakkımda"></a>
-    <a href="#yetenekler" class="nav-item" title="Yetenekler"></a>
-    <a href="#projeler" class="nav-item" title="Projeler"></a>
-    <a href="#iletisim" class="nav-item" title="İletişim"></a>
+    <!-- Sönük Ağaç Katmanı -->
+    <div class="tree-dim"></div>
+    
+    <!-- Tıklanabilir Bağlantılar -->
+    <div class="nav-links">
+      <a href="#hakkimda" class="nav-item active" title="Hakkımda"></a>
+      <a href="#yetenekler" class="nav-item" title="Yetenekler"></a>
+      <a href="#projeler" class="nav-item" title="Projeler"></a>
+      <a href="#iletisim" class="nav-item" title="İletişim"></a>
+    </div>
+
+    <!-- Sihirli Maske ve Işık -->
+    <div class="tree-mask">
+      <div class="glow-box" id="glowBox"></div>
+    </div>
   </nav>
 
   <!-- Sağ İçerik -->
@@ -185,13 +192,14 @@
     </section>
   </main>
 
-  <!-- Scroll Spy Script -->
+  <!-- Scroll Spy Script (Işığı Doğru Motife Taşıyan Kod) -->
   <script>
     const sections = document.querySelectorAll('section');
     const navItems = document.querySelectorAll('.nav-item');
     const main = document.querySelector('main');
+    const glowBox = document.getElementById('glowBox');
 
-    main.addEventListener('scroll', () => {
+    function updateGlow() {
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -202,12 +210,22 @@
       });
 
       navItems.forEach(item => {
-        item.classList.remove('active');
         if (item.getAttribute('href') === `#${current}`) {
           item.classList.add('active');
+          /* Sihirli ışığı tam olarak tıklanan alanın arkasına kaydır */
+          glowBox.style.top = item.offsetTop + 'px';
+          glowBox.style.height = item.offsetHeight + 'px';
+          glowBox.style.opacity = '1';
+        } else {
+          item.classList.remove('active');
         }
       });
-    });
+    }
+
+    main.addEventListener('scroll', updateGlow);
+    window.addEventListener('resize', updateGlow);
+    /* Sayfa açıldığında ışığı ilk bölüme oturtmak için küçük bir bekleme */
+    setTimeout(updateGlow, 100);
   </script>
 </body>
 </html>
