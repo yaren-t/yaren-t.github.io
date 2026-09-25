@@ -23,24 +23,61 @@
       line-height: 1.6;
     }
 
-    /* Sol Menü (Hayat Ağacı Şeridi) */
+    /* Sol Menü Taşıyıcısı */
     nav {
       position: fixed; top: 0; left: 0;
       width: var(--nav-width); height: 100vh;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
-      background-image: url('hayatagaci.png');
-      background-repeat: repeat-y;
-      background-position: center;
-      background-size: 50px; 
       z-index: 10;
       border-right: 1px solid rgba(255, 255, 255, 0.03);
     }
 
-    /* Hayat Ağacının Üzerindeki Tıklanabilir Gizli Alanlar (Işık kaldırıldı) */
+    /* Tüm Ekranı Kaplayan Sönük Hayat Ağacı (Arka Plan) */
+    nav::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('hayatagaci.png');
+      background-repeat: repeat-y;
+      background-position: center top;
+      background-size: 50px; 
+      background-attachment: fixed;
+      opacity: 0.25; /* Odaklanılmayan kısımlar soluk kalır */
+      z-index: -1;
+    }
+
+    /* Görünmez Menü Kutucukları (Işığı yakalayan pencereler) */
     .nav-item {
-      width: 50px; height: 50px; margin: 30px 0;
-      background-color: transparent;
-      cursor: pointer; text-decoration: none;
+      width: 100%; 
+      height: 90px; /* Parlayacak alanın yüksekliği */
+      margin: 5px 0;
+      position: relative;
+      cursor: pointer; 
+      text-decoration: none;
+    }
+
+    /* Sihirli Kısım: Sadece kutucuğun içindeki ağaç parçası renk değiştirip parlar */
+    .nav-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('hayatagaci.png');
+      background-repeat: repeat-y;
+      background-position: center top;
+      background-size: 50px;
+      background-attachment: fixed; /* Arka plandaki ağaçla milimetrik hizalar */
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    /* 1. Aşama: O an aktif olan sayfanın sembolü altın rengi olur (Yuvarlak yok, işaret boyanır) */
+    .nav-item.active::before {
+      opacity: 1;
+      filter: invert(75%) sepia(40%) saturate(500%) hue-rotate(5deg) drop-shadow(0 0 3px rgba(212, 175, 55, 0.4));
+    }
+
+    /* 2. Aşama: Üzerine gelince kendi hatları boyunca ekstra güçlü parlar */
+    .nav-item.active:hover::before, .nav-item:hover::before {
+      opacity: 1;
+      filter: invert(75%) sepia(40%) saturate(500%) hue-rotate(5deg) drop-shadow(0 0 15px var(--accent-color)) brightness(1.3);
     }
 
     /* İçerik Alanı */
@@ -65,13 +102,12 @@
       background-position: center;
       margin: 60px auto 0 auto;
       opacity: 0.4;
-      /* Rumi motifini arka plana uygun altın/bej tonlarına çevirir */
       filter: invert(80%) sepia(30%) saturate(300%) hue-rotate(5deg);
     }
 
     h1 { font-size: 3.5rem; margin-bottom: 10px; color: var(--accent-color); }
     
-    /* Başlıkların yanındaki Pıtrak */
+    /* Başlıkların yanındaki Pıtrak (40px boyutunda) */
     h2 { 
       font-size: 2.2rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); 
       padding-bottom: 10px; display: flex; align-items: center; gap: 16px;
@@ -149,7 +185,7 @@
     </section>
   </main>
 
-  <!-- Scroll Spy Script (Menü tıklamaları için hala aktif) -->
+  <!-- Scroll Spy Script -->
   <script>
     const sections = document.querySelectorAll('section');
     const navItems = document.querySelectorAll('.nav-item');
