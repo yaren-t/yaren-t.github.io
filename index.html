@@ -5,15 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yaren Turan | Portfolyo</title>
   
-  <!-- Google Fonts: Cormorant Garamond & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -43,13 +39,11 @@
   </script>
 
   <style>
-    /* Özel Kaydırma Çubuğu */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #150e1b; }
     ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.35); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.75); }
 
-    /* Derin Ametist Zemin */
     body {
       background-color: #1f1626;
       background-image: 
@@ -59,7 +53,6 @@
       background-attachment: fixed;
     }
 
-    /* Glassmorphism Kartlar */
     .glass-card {
       background: rgba(33, 22, 42, 0.65);
       backdrop-filter: blur(14px);
@@ -76,7 +69,6 @@
 
     .gold-glow { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.75)); }
 
-    /* Dönen Yörünge */
     .orbit-ring {
       border: 1.5px dashed rgba(212, 175, 55, 0.6);
       box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
@@ -88,35 +80,41 @@
     }
 
     /* Sol Ağaç Düğümleri */
+    .nav-node {
+      position: relative;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
     .nav-node .node-circle {
-      border: 1.5px solid rgba(212, 175, 55, 0.35);
-      background: #170f1d;
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      background: #150e1b;
       color: rgba(212, 175, 55, 0.75);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.8), 0 0 4px rgba(212, 175, 55, 0.1);
       transition: all 0.35s ease;
     }
     .nav-node .node-label {
-      color: rgba(212, 175, 55, 0.6);
+      color: rgba(212, 175, 55, 0.65);
       font-weight: 500;
       letter-spacing: 0.14em;
       transition: all 0.35s ease;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     }
     
     .nav-node.active .node-circle,
     .nav-node:hover .node-circle {
       border-color: #ffd700;
-      background: rgba(212, 175, 55, 0.25);
+      background: rgba(212, 175, 55, 0.3);
       color: #ffd700;
-      box-shadow: 0 0 18px rgba(212, 175, 55, 0.85), inset 0 0 10px rgba(255, 215, 0, 0.5);
-      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.95), inset 0 0 12px rgba(255, 215, 0, 0.6);
+      transform: scale(1.15);
     }
     .nav-node.active .node-label,
     .nav-node:hover .node-label {
       color: #ffd700;
       font-weight: 600;
-      text-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+      text-shadow: 0 0 14px rgba(212, 175, 55, 0.9), 0 2px 4px rgba(0,0,0,0.9);
     }
 
-    /* Altın Bölüm Ayracı */
     .golden-divider {
       position: relative;
       display: flex;
@@ -147,10 +145,10 @@
 
   <div class="max-w-[1400px] mx-auto flex flex-col lg:flex-row min-h-screen relative">
 
-    <!-- ================= SOL SIDEBAR ================= -->
-    <aside class="w-full lg:w-[32%] xl:w-[28%] lg:h-screen lg:sticky lg:top-0 flex flex-col justify-between items-center py-6 px-4 z-30 border-b lg:border-b-0 lg:border-r border-amethyst-border/30 bg-[#1f1626]/90 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none">
+    <!-- SOL SIDEBAR: HAYAT AĞACI GÖRSELİ ÜZERİNE KİLİTLİ MENÜ -->
+    <aside class="w-full lg:w-[32%] xl:w-[28%] lg:h-screen lg:sticky lg:top-0 flex flex-col justify-between items-center py-6 px-4 z-30 border-b lg:border-b-0 lg:border-r border-amethyst-border/30 bg-[#1f1626]/95 lg:bg-transparent">
       
-      <!-- Üst Başlık -->
+      <!-- Logo -->
       <div class="w-full flex items-center justify-between px-2 sm:px-4">
         <a href="#hero" class="flex items-center gap-2.5 group">
           <div class="w-7 h-7 rounded-full border border-gold/40 flex items-center justify-center text-gold group-hover:border-gold transition-all">
@@ -163,88 +161,43 @@
         </span>
       </div>
 
-      <!-- Ağaç & Düğümler -->
-      <div class="relative w-full max-w-[320px] h-[460px] sm:h-[500px] flex items-center justify-center my-4 lg:my-auto">
+      <!-- Ağaç ve Butonlar -->
+      <div class="relative w-full max-w-[320px] h-[520px] sm:h-[560px] flex items-center justify-center my-4 lg:my-auto">
         
-        <!-- Hayat Ağacı SVG -->
-        <svg class="w-full h-full select-none pointer-events-none drop-shadow-[0_0_12px_rgba(212,175,55,0.35)]" viewBox="0 0 320 540" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="treeGold" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fff0a6" />
-              <stop offset="35%" stop-color="#ffd700" />
-              <stop offset="70%" stop-color="#d4af37" />
-              <stop offset="100%" stop-color="#8a6414" />
-            </linearGradient>
-            <radialGradient id="haloBackground" cx="50%" cy="22%" r="40%">
-              <stop offset="0%" stop-color="rgba(212,175,55,0.25)" />
-              <stop offset="70%" stop-color="rgba(212,175,55,0.05)" />
-              <stop offset="100%" stop-color="transparent" />
-            </radialGradient>
-          </defs>
+        <!-- Yüklediğin İndirilen Görsel: hayat agaci.jpg -->
+        <img 
+          src="hayat%20agaci.jpg" 
+          alt="Hayat Ağacı" 
+          class="absolute inset-0 w-full h-full object-contain pointer-events-none select-none drop-shadow-[0_0_20px_rgba(212,175,55,0.35)]"
+          onerror="this.onerror=null; this.src='hayat agaci.jpg';"
+        >
 
-          <!-- Halo -->
-          <circle cx="160" cy="115" r="95" fill="url(#haloBackground)" />
-          <circle cx="160" cy="115" r="88" stroke="#d4af37" stroke-width="0.75" stroke-dasharray="3 4" opacity="0.35" />
-
-          <!-- Kökler -->
-          <g stroke="url(#treeGold)" stroke-linecap="round" opacity="0.9">
-            <path d="M160 435 C150 460 110 485 50 515" stroke-width="2.2" />
-            <path d="M160 440 C145 470 90 500 30 505" stroke-width="1.8" />
-            <path d="M160 445 C150 480 120 515 90 535" stroke-width="1.6" />
-            <path d="M160 450 L160 538" stroke-width="2" />
-            <path d="M160 435 C170 460 210 485 270 515" stroke-width="2.2" />
-            <path d="M160 440 C175 470 230 500 290 505" stroke-width="1.8" />
-            <path d="M160 445 C170 480 200 515 230 535" stroke-width="1.6" />
-          </g>
-
-          <!-- Gövde -->
-          <path d="M160 90 L160 440" stroke="url(#treeGold)" stroke-width="3.2" stroke-linecap="round" />
-
-          <!-- Dallar -->
-          <g stroke="url(#treeGold)" stroke-linecap="round" opacity="0.85">
-            <path d="M160 145 C135 130 95 128 55 155 C75 125 110 110 145 120" stroke-width="1.8" />
-            <path d="M160 115 C130 90 85 85 45 108 C65 80 110 70 145 92" stroke-width="1.6" />
-            <path d="M160 85 C135 60 95 50 60 62 C85 40 125 35 150 68" stroke-width="1.5" />
-            <path d="M160 145 C185 130 225 128 265 155 C245 125 210 110 175 120" stroke-width="1.8" />
-            <path d="M160 115 C190 90 235 85 275 108 C255 80 210 70 175 92" stroke-width="1.6" />
-            <path d="M160 85 C185 60 225 50 260 62 C235 40 195 35 170 68" stroke-width="1.5" />
-          </g>
-
-          <!-- Yapraklar -->
-          <g fill="#ffd700" opacity="0.85">
-            <circle cx="55" cy="155" r="2.5" /><circle cx="45" cy="108" r="3" />
-            <circle cx="60" cy="62" r="2.5" /><circle cx="160" cy="10" r="3" />
-            <circle cx="260" cy="62" r="2.5" /><circle cx="275" cy="108" r="3" />
-            <circle cx="265" cy="155" r="2.5" />
-          </g>
-        </svg>
-
-        <!-- Navigasyon Düğümleri: Ağacın gövdesine tam kilitli -->
-        <nav id="tree-nav" class="absolute inset-y-0 left-0 right-0 flex flex-col justify-between py-12 items-center pointer-events-auto">
+        <!-- DÜĞÜMLER (Ağacın Gövdesine Tam Hizalı) -->
+        <nav id="tree-nav" class="absolute inset-y-0 left-0 right-0 flex flex-col justify-between py-16 items-center pointer-events-auto">
           
           <a href="#hero" class="nav-node active flex items-center justify-center lg:justify-start w-full group cursor-pointer" data-target="hero">
-            <div class="node-circle w-10 h-10 rounded-full flex items-center justify-center z-10 shrink-0 mx-auto lg:ml-[calc(50%-20px)] lg:mr-0">
+            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0 mx-auto lg:ml-[calc(50%-22px)] lg:mr-0">
               <i class="fa-solid fa-house text-xs"></i>
             </div>
             <span class="node-label hidden lg:inline-block ml-4 text-xs tracking-wider uppercase">Ana Sayfa</span>
           </a>
 
           <a href="#about" class="nav-node flex items-center justify-center lg:justify-start w-full group cursor-pointer" data-target="about">
-            <div class="node-circle w-10 h-10 rounded-full flex items-center justify-center z-10 shrink-0 mx-auto lg:ml-[calc(50%-20px)] lg:mr-0">
+            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0 mx-auto lg:ml-[calc(50%-22px)] lg:mr-0">
               <i class="fa-solid fa-user text-xs"></i>
             </div>
             <span class="node-label hidden lg:inline-block ml-4 text-xs tracking-wider uppercase">Hakkımda</span>
           </a>
 
           <a href="#projects" class="nav-node flex items-center justify-center lg:justify-start w-full group cursor-pointer" data-target="projects">
-            <div class="node-circle w-10 h-10 rounded-full flex items-center justify-center z-10 shrink-0 mx-auto lg:ml-[calc(50%-20px)] lg:mr-0">
+            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0 mx-auto lg:ml-[calc(50%-22px)] lg:mr-0">
               <i class="fa-solid fa-briefcase text-xs"></i>
             </div>
             <span class="node-label hidden lg:inline-block ml-4 text-xs tracking-wider uppercase">Projeler</span>
           </a>
 
           <a href="#contact" class="nav-node flex items-center justify-center lg:justify-start w-full group cursor-pointer" data-target="contact">
-            <div class="node-circle w-10 h-10 rounded-full flex items-center justify-center z-10 shrink-0 mx-auto lg:ml-[calc(50%-20px)] lg:mr-0">
+            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0 mx-auto lg:ml-[calc(50%-22px)] lg:mr-0">
               <i class="fa-solid fa-envelope text-xs"></i>
             </div>
             <span class="node-label hidden lg:inline-block ml-4 text-xs tracking-wider uppercase">İletişim</span>
@@ -253,14 +206,13 @@
         </nav>
       </div>
 
-      <!-- Alt Pusula Notu -->
       <div class="hidden lg:flex items-center gap-2.5 text-xs text-gold/60 font-light px-2">
         <i class="fa-regular fa-compass text-gold"></i>
         <span>Hayat ağacı geziniminizi rehberler</span>
       </div>
     </aside>
 
-    <!-- ================= SAĞ İÇERİK ================= -->
+    <!-- SAĞ İÇERİK -->
     <main class="w-full lg:w-[68%] xl:w-[72%] px-6 sm:px-12 lg:px-16 py-12 lg:py-20 space-y-20">
 
       <!-- HERO -->
@@ -291,7 +243,6 @@
           </div>
         </div>
 
-        <!-- Profil Alanı -->
         <div class="relative w-48 h-48 sm:w-56 sm:h-56 shrink-0 flex items-center justify-center">
           <div class="absolute inset-0 rounded-full orbit-ring"></div>
           <div class="absolute top-2 right-6 w-2.5 h-2.5 rounded-full bg-gold gold-glow"></div>
@@ -325,7 +276,6 @@
           İstatistiksel modelleme, veri analitiği ve modern web arayüzleri geliştirme konularında kendimi sürekli geliştiriyorum. Büyük veri kümelerini anlamlı içgörülere dönüştürmek, problem çözmek ve kullanıcı dostu analitik paneller üretmek en büyük motivasyonum.
         </p>
 
-        <!-- Rozetler -->
         <div class="flex flex-wrap gap-3 pt-2">
           <div class="glass-card px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs text-gray-200 hover:text-gold transition-colors">
             <i class="fa-brands fa-python text-gold text-sm"></i>
@@ -369,7 +319,6 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
           
-          <!-- Kart 1 -->
           <div class="glass-card rounded-2xl p-3 flex flex-col justify-between group">
             <div class="space-y-3">
               <div class="relative w-full h-36 rounded-xl overflow-hidden bg-amethyst-deep flex items-center justify-center border border-gold/10">
@@ -393,7 +342,6 @@
             </div>
           </div>
 
-          <!-- Kart 2 -->
           <div class="glass-card rounded-2xl p-3 flex flex-col justify-between group">
             <div class="space-y-3">
               <div class="relative w-full h-36 rounded-xl overflow-hidden bg-amethyst-deep flex items-center justify-center border border-gold/10">
@@ -417,7 +365,6 @@
             </div>
           </div>
 
-          <!-- Kart 3 -->
           <div class="glass-card rounded-2xl p-3 flex flex-col justify-between group">
             <div class="space-y-3">
               <div class="relative w-full h-36 rounded-xl overflow-hidden bg-amethyst-deep flex items-center justify-center border border-gold/10">
@@ -508,7 +455,6 @@
     </main>
   </div>
 
-  <!-- Toast Bildirimi -->
   <div id="toast-notification" class="fixed bottom-6 right-6 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300">
     <div class="px-5 py-3 rounded-xl bg-amethyst-deep border border-gold text-gold text-xs font-medium shadow-2xl flex items-center gap-3">
       <i class="fa-solid fa-circle-check text-gold-glow text-sm"></i>
@@ -516,7 +462,6 @@
     </div>
   </div>
 
-  <!-- JavaScript -->
   <script>
     function copyEmailToClipboard(email) {
       const copyPill = document.getElementById('copy-status-pill');
@@ -553,7 +498,6 @@
       }
     }
 
-    // Gelişmiş Scroll-Spy (Son bölüm ve sayfa altı garantili)
     document.addEventListener('DOMContentLoaded', () => {
       const sections = document.querySelectorAll('main section');
       const navNodes = document.querySelectorAll('.nav-node');
@@ -578,7 +522,6 @@
 
       sections.forEach((section) => observer.observe(section));
 
-      // Sayfa en aşağıya indiğinde 'İletişim' düğümünü kesin aktif et
       window.addEventListener('scroll', () => {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
           setActiveNode('contact');
