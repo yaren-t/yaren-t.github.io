@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yaren Turan | Portfolyo</title>
   
+  <!-- Fontlar: Cormorant Garamond (Lüks Serif Başlıklar) & Inter (Okunaklı Gövde) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome İkonları -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -18,15 +22,15 @@
           colors: {
             amethyst: {
               DEFAULT: '#1f1626',
-              deep: '#150e1b',
-              surface: 'rgba(36, 24, 46, 0.65)',
-              border: 'rgba(212, 175, 55, 0.22)'
+              deep: '#140d1a',
+              card: 'rgba(32, 21, 41, 0.72)',
+              border: 'rgba(212, 175, 55, 0.2)'
             },
             gold: {
               DEFAULT: '#d4af37',
               glow: '#ffd700',
-              soft: '#e8c86d',
-              dim: 'rgba(212, 175, 55, 0.35)'
+              soft: '#edd58a',
+              dim: 'rgba(212, 175, 55, 0.4)'
             }
           },
           fontFamily: {
@@ -39,351 +43,454 @@
   </script>
 
   <style>
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #150e1b; }
+    /* Özel İnce Kaydırma Çubuğu */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #140d1a; }
     ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.35); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.75); }
 
+    /* Derin Ametist Yumuşak Geçişli Arka Plan */
     body {
       background-color: #1f1626;
       background-image: 
-        radial-gradient(circle at 15% 20%, rgba(138, 43, 226, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 85% 65%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 50% 90%, rgba(75, 0, 130, 0.1) 0%, transparent 50%);
+        radial-gradient(circle at 12% 18%, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 88% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(31, 22, 38, 1) 0%, #150e1b 100%);
       background-attachment: fixed;
     }
 
+    /* Cam Efektli (Glassmorphic) Kartlar */
     .glass-card {
-      background: rgba(33, 22, 42, 0.65);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+      background: rgba(30, 20, 38, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.22);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.65);
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .glass-card:hover {
       border-color: rgba(212, 175, 55, 0.55);
-      box-shadow: 0 16px 36px -8px rgba(212, 175, 55, 0.18), 0 0 15px rgba(212, 175, 55, 0.08);
-      transform: translateY(-4px);
+      box-shadow: 0 14px 34px -8px rgba(212, 175, 55, 0.16);
+      transform: translateY(-3px);
     }
 
-    .gold-glow { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.75)); }
-
+    /* Profil Dış Yörünge Halkası */
     .orbit-ring {
       border: 1.5px dashed rgba(212, 175, 55, 0.6);
-      box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
-      animation: spin-orbit 45s linear infinite;
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+      animation: spin-orbit 50s linear infinite;
     }
     @keyframes spin-orbit {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    /* Sol Ağaç Düğümleri */
+    /* Sol Ağaç Menü Düğümleri */
     .nav-node {
-      position: relative;
-      z-index: 10;
       transition: all 0.3s ease;
+      position: relative;
+      z-index: 20;
     }
     .nav-node .node-circle {
       border: 1.5px solid rgba(212, 175, 55, 0.45);
-      background: #150e1b;
+      background: #191020;
       color: rgba(212, 175, 55, 0.75);
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.8), 0 0 4px rgba(212, 175, 55, 0.1);
-      transition: all 0.35s ease;
+      box-shadow: 0 0 12px rgba(0,0,0,0.8), inset 0 0 4px rgba(212, 175, 55, 0.2);
+      transition: all 0.3s ease;
     }
     .nav-node .node-label {
       color: rgba(212, 175, 55, 0.65);
       font-weight: 500;
-      letter-spacing: 0.14em;
-      transition: all 0.35s ease;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+      letter-spacing: 0.15em;
+      transition: all 0.3s ease;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
     }
-    
+
+    /* Aktif Düğüm Parıltısı */
     .nav-node.active .node-circle,
     .nav-node:hover .node-circle {
       border-color: #ffd700;
-      background: rgba(212, 175, 55, 0.3);
+      background: rgba(212, 175, 55, 0.28);
       color: #ffd700;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.95), inset 0 0 12px rgba(255, 215, 0, 0.6);
-      transform: scale(1.15);
+      box-shadow: 0 0 22px rgba(255, 215, 0, 0.95), inset 0 0 10px rgba(255, 215, 0, 0.5);
+      transform: scale(1.12);
     }
     .nav-node.active .node-label,
     .nav-node:hover .node-label {
       color: #ffd700;
       font-weight: 600;
-      text-shadow: 0 0 14px rgba(212, 175, 55, 0.9), 0 2px 4px rgba(0,0,0,0.9);
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
     }
 
+    /* Altın İnce Çizgi ve 3 Yapraklı Ayraç */
     .golden-divider {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      height: 20px;
+      height: 24px;
     }
     .golden-divider::before {
       content: "";
       position: absolute;
       left: 0; right: 0; top: 50%;
       height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.45) 20%, rgba(212, 175, 55, 0.45) 80%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.4) 15%, rgba(212, 175, 55, 0.4) 85%, transparent 100%);
     }
     .golden-divider-icon {
       position: relative;
       background: #1f1626;
-      padding: 0 14px;
+      padding: 0 16px;
       color: #d4af37;
-      font-size: 13px;
+      font-size: 14px;
       z-index: 2;
     }
   </style>
 </head>
 
-<body class="text-gray-200 font-body min-h-screen selection:bg-gold selection:text-amethyst-deep antialiased overflow-x-hidden">
+<body class="text-gray-200 font-body min-h-screen selection:bg-gold selection:text-amethyst-deep antialiased">
 
-  <div class="max-w-[1400px] mx-auto flex flex-col lg:flex-row min-h-screen relative">
+  <!-- ================= ANA TAŞIYICI: MAKSİMUM 1240px İLE FOTOĞRAFTAKİ ZARİF BOYUTLAR ================= -->
+  <div class="max-w-[1240px] mx-auto flex flex-col lg:flex-row min-h-screen relative">
 
-    <!-- SOL SIDEBAR: HAYAT AĞACI GÖRSELİ ÜZERİNE KİLİTLİ MENÜ -->
-    <aside class="w-full lg:w-[32%] xl:w-[28%] lg:h-screen lg:sticky lg:top-0 flex flex-col justify-between items-center py-6 px-4 z-30 border-b lg:border-b-0 lg:border-r border-amethyst-border/30 bg-[#1f1626]/95 lg:bg-transparent">
+    <!-- ================= SOL TARAF (SIDEBAR): TAM ENTEGRE HAYAT AĞACI ================= -->
+    <aside class="w-full lg:w-[310px] xl:w-[330px] lg:h-screen lg:sticky lg:top-0 flex flex-col justify-between items-center py-6 px-4 z-30 border-b lg:border-b-0 lg:border-r border-gold/20">
       
-      <!-- Logo -->
-      <div class="w-full flex items-center justify-between px-2 sm:px-4">
-        <a href="#hero" class="flex items-center gap-2.5 group">
-          <div class="w-7 h-7 rounded-full border border-gold/40 flex items-center justify-center text-gold group-hover:border-gold transition-all">
-            <i class="fa-solid fa-seedling text-xs"></i>
-          </div>
-          <span class="font-heading text-lg text-gold tracking-widest uppercase font-semibold">Portfolyo</span>
-        </a>
-        <span class="text-[11px] uppercase tracking-widest text-gold/60 font-medium px-2 py-0.5 rounded-full border border-gold/20 bg-amethyst-deep/60">
-          2026
-        </span>
-      </div>
-
-      <!-- Ağaç ve Butonlar -->
-      <div class="relative w-full max-w-[320px] h-[520px] sm:h-[560px] flex items-center justify-center my-4 lg:my-auto">
+      <!-- Ağaç ve Dikey Menü Alanı (Dış kutu yok, tamamen şeffaf) -->
+      <div class="relative w-full h-[580px] lg:h-[90vh] max-h-[660px] flex items-center justify-center my-auto">
         
-        <!-- Yüklediğin İndirilen Görsel: hayat agaci.jpg -->
-        <img 
-          src="hayat-agaci.jpg" 
-          alt="Hayat Ağacı" 
-          class="absolute inset-0 w-full h-full object-contain pointer-events-none select-none drop-shadow-[0_0_20px_rgba(212,175,55,0.35)]"
-          onerror="this.onerror=null; this.src='hayat agaci.jpg';"
-        >
+        <!-- Şeffaf Altın Hayat Ağacı Vektör Çizimi -->
+        <svg class="absolute inset-0 w-full h-full select-none pointer-events-none drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" viewBox="0 0 300 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldTreeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fff2b3" />
+              <stop offset="30%" stop-color="#ffd700" />
+              <stop offset="70%" stop-color="#d4af37" />
+              <stop offset="100%" stop-color="#805d15" />
+            </linearGradient>
+            <radialGradient id="canopyAura" cx="42%" cy="18%" r="35%">
+              <stop offset="0%" stop-color="rgba(212,175,55,0.22)" />
+              <stop offset="100%" stop-color="transparent" />
+            </radialGradient>
+          </defs>
 
-        <!-- DÜĞÜMLER (Ağacın Gövdesine Tam Hizalı) -->
-        <nav id="tree-nav" class="absolute inset-y-0 left-0 right-0 flex flex-col justify-between py-16 items-center pointer-events-auto">
+          <!-- Taç Arkası Dairesel Işık -->
+          <circle cx="125" cy="115" r="95" fill="url(#canopyAura)" />
+          <circle cx="125" cy="115" r="88" stroke="#d4af37" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.4" />
+
+          <!-- AĞAÇ KÖKLERİ (Tabanda Yayılan Görkemli Kökler) -->
+          <g stroke="url(#goldTreeGrad)" stroke-linecap="round" opacity="0.9">
+            <path d="M125 500 C115 530 80 560 25 590" stroke-width="2.2" />
+            <path d="M125 505 C110 540 60 575 10 580" stroke-width="1.8" />
+            <path d="M125 510 C115 550 90 585 60 605" stroke-width="1.5" />
+            <path d="M125 515 L125 610" stroke-width="2" />
+            <path d="M125 500 C135 530 170 560 225 590" stroke-width="2.2" />
+            <path d="M125 505 C140 540 190 575 240 580" stroke-width="1.8" />
+            <path d="M125 510 C135 550 160 585 190 605" stroke-width="1.5" />
+            <!-- Kılcal kökler -->
+            <path d="M80 550 Q50 585 25 595" stroke-width="1" opacity="0.6" />
+            <path d="M170 550 Q200 585 225 595" stroke-width="1" opacity="0.6" />
+          </g>
+
+          <!-- AĞAÇ GÖVDESİ (Düğümlerin Arkasından Aşağı İnen Işıltılı Sütun) -->
+          <path d="M125 90 L125 505" stroke="url(#goldTreeGrad)" stroke-width="3" stroke-linecap="round" />
+          <path d="M121 115 C118 240 118 380 121 500" stroke="#ffd700" stroke-width="0.9" opacity="0.6" />
+          <path d="M129 115 C132 240 132 380 129 500" stroke="#ffd700" stroke-width="0.9" opacity="0.6" />
+
+          <!-- AĞAÇ TACI VE DALLAR (Üst Kısım Geometrik & Organik Dallar) -->
+          <g stroke="url(#goldTreeGrad)" stroke-linecap="round" opacity="0.85">
+            <!-- Sol Dallar -->
+            <path d="M125 145 C100 130 65 125 30 150 C50 120 85 108 115 118" stroke-width="1.8" />
+            <path d="M125 115 C95 90 55 85 20 105 C40 78 80 68 115 90" stroke-width="1.6" />
+            <path d="M125 85 C100 60 65 50 35 60 C60 38 95 35 118 65" stroke-width="1.4" />
+            <path d="M125 60 C110 35 85 22 55 24 C80 12 105 14 120 42" stroke-width="1.2" />
+            
+            <!-- Sağ Dallar -->
+            <path d="M125 145 C150 130 185 125 220 150 C200 120 165 108 135 118" stroke-width="1.8" />
+            <path d="M125 115 C155 90 195 85 230 105 C210 78 170 68 135 90" stroke-width="1.6" />
+            <path d="M125 85 C150 60 185 50 215 60 C190 38 155 35 132 65" stroke-width="1.4" />
+            <path d="M125 60 C140 35 165 22 195 24 C170 12 145 14 130 42" stroke-width="1.2" />
+          </g>
+
+          <!-- Altın Parıltı Noktaları -->
+          <g fill="#ffd700" opacity="0.9">
+            <circle cx="30" cy="150" r="2.5" />
+            <circle cx="20" cy="105" r="2.8" />
+            <circle cx="35" cy="60" r="2.2" />
+            <circle cx="55" cy="24" r="2.2" />
+            <circle cx="125" cy="12" r="3" />
+            <circle cx="195" cy="24" r="2.2" />
+            <circle cx="215" cy="60" r="2.2" />
+            <circle cx="230" cy="105" r="2.8" />
+            <circle cx="220" cy="150" r="2.5" />
+          </g>
+        </svg>
+
+        <!-- DİKEY MENÜ BUTONLARI (Gövde Üzerine Milimetrik Hizalı) -->
+        <nav id="tree-nav" class="absolute inset-y-0 left-0 right-0 flex flex-col justify-around py-16 pointer-events-auto">
           
-          <a href="#hero" class="nav-node active flex items-center justify-center lg:justify-start w-full group cursor-pointer" data-target="hero">
-            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0 mx-auto lg:ml-[calc(50%-22px)] lg:mr-0">
+          <!-- 1. Ana Sayfa -->
+          <a href="#hero" class="nav-node active flex items-center group cursor-pointer pl-6 sm:pl-8 lg:pl-10" data-target="hero">
+            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0">
               <i class="fa-solid fa-house text-xs"></i>
             </div>
-            <span class="node-label hidden lg:inline-block ml-4 text-xs tracking-wider uppercase">Ana Sayfa</span>
+            <span class="node-label ml-4 text-xs tracking-wider uppercase font-medium">
+              Ana Sayfa
+            </span>
           </a>
 
-          <a href="#about" class="nav-node flex items-center justify-center lg:justify-start w-full group cursor-pointer" data-target="about">
-            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0 mx-auto lg:ml-[calc(50%-22px)] lg:mr-0">
+          <!-- 2. Hakkımda -->
+          <a href="#about" class="nav-node flex items-center group cursor-pointer pl-6 sm:pl-8 lg:pl-10" data-target="about">
+            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0">
               <i class="fa-solid fa-user text-xs"></i>
             </div>
-            <span class="node-label hidden lg:inline-block ml-4 text-xs tracking-wider uppercase">Hakkımda</span>
+            <span class="node-label ml-4 text-xs tracking-wider uppercase font-medium">
+              Hakkımda
+            </span>
           </a>
 
-          <a href="#projects" class="nav-node flex items-center justify-center lg:justify-start w-full group cursor-pointer" data-target="projects">
-            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0 mx-auto lg:ml-[calc(50%-22px)] lg:mr-0">
+          <!-- 3. Projeler -->
+          <a href="#projects" class="nav-node flex items-center group cursor-pointer pl-6 sm:pl-8 lg:pl-10" data-target="projects">
+            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0">
               <i class="fa-solid fa-briefcase text-xs"></i>
             </div>
-            <span class="node-label hidden lg:inline-block ml-4 text-xs tracking-wider uppercase">Projeler</span>
+            <span class="node-label ml-4 text-xs tracking-wider uppercase font-medium">
+              Projeler
+            </span>
           </a>
 
-          <a href="#contact" class="nav-node flex items-center justify-center lg:justify-start w-full group cursor-pointer" data-target="contact">
-            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0 mx-auto lg:ml-[calc(50%-22px)] lg:mr-0">
+          <!-- 4. İletişim -->
+          <a href="#contact" class="nav-node flex items-center group cursor-pointer pl-6 sm:pl-8 lg:pl-10" data-target="contact">
+            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0">
               <i class="fa-solid fa-envelope text-xs"></i>
             </div>
-            <span class="node-label hidden lg:inline-block ml-4 text-xs tracking-wider uppercase">İletişim</span>
+            <span class="node-label ml-4 text-xs tracking-wider uppercase font-medium">
+              İletişim
+            </span>
           </a>
 
         </nav>
       </div>
 
-      <div class="hidden lg:flex items-center gap-2.5 text-xs text-gold/60 font-light px-2">
-        <i class="fa-regular fa-compass text-gold"></i>
-        <span>Hayat ağacı geziniminizi rehberler</span>
-      </div>
     </aside>
 
-    <!-- SAĞ İÇERİK -->
-    <main class="w-full lg:w-[68%] xl:w-[72%] px-6 sm:px-12 lg:px-16 py-12 lg:py-20 space-y-20">
 
-      <!-- HERO -->
-      <section id="hero" class="scroll-mt-24 flex flex-col md:flex-row items-center justify-between gap-10">
-        <div class="flex-1 space-y-5 text-center md:text-left">
+    <!-- ================= SAĞ TARAF (MAIN): SCROLL EDİLEN İÇERİK ================= -->
+    <main class="flex-1 px-6 sm:px-12 lg:px-14 py-10 lg:py-16 space-y-16">
+
+      <!-- ================= 1. HERO (GİRİŞ) ================= -->
+      <section id="hero" class="scroll-mt-16 flex flex-col md:flex-row items-center justify-between gap-8 pt-4">
+        
+        <!-- Yazı Alanı -->
+        <div class="flex-1 space-y-4 text-center md:text-left">
+          
           <div class="inline-flex items-center gap-1.5 text-xs text-gold font-medium tracking-wider">
             <span>Merhaba, ben</span>
             <span class="text-gold-glow">✦</span>
           </div>
 
-          <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl text-white font-bold tracking-tight leading-tight">
+          <h1 class="font-heading text-4xl sm:text-5xl text-white font-bold tracking-tight leading-tight">
             Yaren Turan <br>
-            <span class="text-gold font-normal italic font-heading text-3xl sm:text-4xl">
+            <span class="text-gold font-normal italic font-heading text-2xl sm:text-3xl">
               / İstatistik & Veri Analizi
             </span>
           </h1>
 
-          <p class="text-gray-300 text-sm sm:text-base leading-relaxed font-light max-w-lg">
-            Verilerin ardındaki hikayeleri keşfeden, analitik düşünceyi modern yazılım teknolojileri ve estetik arayüzlerle buluşturan bir araştırmacıyım.
+          <p class="text-gray-300 text-sm leading-relaxed font-light max-w-md mx-auto md:mx-0">
+            Tutkulu, yaratıcı ve detay odaklı bir araştırmacıyım. Verileri hikayelere ve estetik dijital deneyimlere dönüştürüyorum.
           </p>
 
-          <div class="pt-3 flex flex-wrap items-center justify-center md:justify-start gap-4">
-            <a href="#projects" class="px-5 py-2.5 rounded-full border border-gold/40 bg-amethyst-surface hover:bg-gold/15 text-gold text-xs font-semibold tracking-wider uppercase transition-all duration-300 flex items-center gap-2.5 shadow-lg shadow-gold/5 hover:border-gold hover:scale-[1.02] active:scale-95">
-              <i class="fa-solid fa-compass-drafting text-xs"></i>
-              <span>Çalışmalarımı Keşfet</span>
+          <div class="pt-2 flex items-center justify-center md:justify-start">
+            <a href="#projects" class="px-5 py-2.5 rounded-full border border-gold/40 bg-amethyst-card hover:bg-gold/15 text-gold text-xs font-semibold tracking-wider uppercase transition-all duration-300 flex items-center gap-2.5 shadow-lg shadow-gold/5 hover:border-gold hover:scale-[1.02] active:scale-95">
+              <i class="fa-regular fa-id-badge text-xs"></i>
+              <span>Özgeçmişimi İncele</span>
               <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </a>
           </div>
         </div>
 
-        <div class="relative w-48 h-48 sm:w-56 sm:h-56 shrink-0 flex items-center justify-center">
+        <!-- Profil Fotoğrafı (Altın Yörüngeli) -->
+        <div class="relative w-44 h-44 sm:w-52 sm:h-52 shrink-0 flex items-center justify-center">
+          <!-- Dönen Kesikli Çember -->
           <div class="absolute inset-0 rounded-full orbit-ring"></div>
-          <div class="absolute top-2 right-6 w-2.5 h-2.5 rounded-full bg-gold gold-glow"></div>
-          <div class="absolute bottom-5 left-3 w-2 h-2 rounded-full bg-gold-glow"></div>
+          
+          <!-- Yörüngedeki Altın Yıldızlar -->
+          <div class="absolute top-2 right-6 w-2.5 h-2.5 rounded-full bg-gold drop-shadow-[0_0_8px_#ffd700]"></div>
+          <div class="absolute bottom-4 left-3 w-2 h-2 rounded-full bg-gold drop-shadow-[0_0_8px_#ffd700]"></div>
 
-          <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-gold/50 p-1 bg-amethyst-deep flex items-center justify-center">
+          <!-- İç Fotoğraf Çemberi -->
+          <div class="w-36 h-36 sm:w-42 sm:h-42 rounded-full overflow-hidden border-2 border-gold/50 p-1 bg-amethyst-deep flex items-center justify-center">
             <img 
               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" 
               alt="Yaren Turan" 
               class="w-full h-full object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-500"
-              onerror="this.onerror=null; this.src='https://placehold.co/400x400/1f1626/d4af37?text=YT';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x400/1f1626/d4af37?text=Yaren+Turan';"
             >
           </div>
         </div>
       </section>
 
+      <!-- Altın Bölüm Ayracı (3 Yaprak Motifli) -->
       <div class="golden-divider">
-        <span class="golden-divider-icon"><i class="fa-solid fa-seedling"></i></span>
+        <span class="golden-divider-icon">
+          <i class="fa-solid fa-seedling"></i>
+        </span>
       </div>
 
-      <!-- HAKKIMDA -->
-      <section id="about" class="scroll-mt-24 space-y-6">
+
+      <!-- ================= 2. HAKKIMDA ================= -->
+      <section id="about" class="scroll-mt-24 space-y-5">
+        
         <div class="flex items-center gap-2">
-          <h2 class="font-heading text-2xl sm:text-3xl text-gold font-semibold tracking-wide uppercase">
+          <h2 class="font-heading text-2xl text-gold font-semibold tracking-wide uppercase">
             Hakkımda
           </h2>
-          <span class="text-gold-glow text-sm">✦</span>
+          <span class="text-gold-glow text-xs">✦</span>
         </div>
 
-        <p class="text-gray-300 text-sm sm:text-base leading-relaxed font-light">
-          İstatistiksel modelleme, veri analitiği ve modern web arayüzleri geliştirme konularında kendimi sürekli geliştiriyorum. Büyük veri kümelerini anlamlı içgörülere dönüştürmek, problem çözmek ve kullanıcı dostu analitik paneller üretmek en büyük motivasyonum.
+        <p class="text-gray-300 text-sm leading-relaxed font-light">
+          Yazılım geliştirme, problem çözme ve yeni teknolojiler öğrenmeye büyük ilgi duyuyorum. Modern ve kullanıcı dostu dijital deneyimler oluşturmak benim için bir tutku. İstatistiksel düşünce disiplinini web teknolojileri ile bir araya getiriyorum.
         </p>
 
-        <div class="flex flex-wrap gap-3 pt-2">
-          <div class="glass-card px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs text-gray-200 hover:text-gold transition-colors">
-            <i class="fa-brands fa-python text-gold text-sm"></i>
-            <span class="font-medium">Python (Pandas & NumPy)</span>
+        <!-- Teknoloji Rozetleri (İlk Fotoğraftaki Gibi Yatay Sıralı) -->
+        <div class="flex flex-wrap gap-2.5 pt-1">
+          <div class="glass-card px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs text-gray-200 hover:text-gold transition-colors">
+            <i class="fa-solid fa-bolt text-gold text-xs"></i>
+            <span class="font-medium">JavaScript</span>
           </div>
-          <div class="glass-card px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs text-gray-200 hover:text-gold transition-colors">
-            <i class="fa-solid fa-database text-gold text-sm"></i>
-            <span class="font-medium">SQL</span>
+          <div class="glass-card px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs text-gray-200 hover:text-gold transition-colors">
+            <i class="fa-brands fa-react text-gold text-xs"></i>
+            <span class="font-medium">React</span>
           </div>
-          <div class="glass-card px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs text-gray-200 hover:text-gold transition-colors">
-            <i class="fa-solid fa-chart-pie text-gold text-sm"></i>
-            <span class="font-medium">İstatistiksel Analiz</span>
+          <div class="glass-card px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs text-gray-200 hover:text-gold transition-colors">
+            <i class="fa-solid fa-compass-drafting text-gold text-xs"></i>
+            <span class="font-medium">UI/UX</span>
           </div>
-          <div class="glass-card px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs text-gray-200 hover:text-gold transition-colors">
-            <i class="fa-solid fa-table-cells text-gold text-sm"></i>
-            <span class="font-medium">Excel Dashboard</span>
+          <div class="glass-card px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs text-gray-200 hover:text-gold transition-colors">
+            <i class="fa-solid fa-laptop-code text-gold text-xs"></i>
+            <span class="font-medium">Node.js</span>
           </div>
-          <div class="glass-card px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs text-gray-200 hover:text-gold transition-colors">
-            <i class="fa-brands fa-figma text-gold text-sm"></i>
-            <span class="font-medium">Figma UI/UX</span>
+          <div class="glass-card px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs text-gray-200 hover:text-gold transition-colors">
+            <i class="fa-solid fa-leaf text-gold text-xs"></i>
+            <span class="font-medium">MongoDB</span>
           </div>
-          <div class="glass-card px-4 py-2 rounded-xl flex items-center gap-2.5 text-xs text-gray-200 hover:text-gold transition-colors">
-            <i class="fa-brands fa-git-alt text-gold text-sm"></i>
-            <span class="font-medium">Git & GitHub</span>
+          <div class="glass-card px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs text-gray-200 hover:text-gold transition-colors">
+            <i class="fa-brands fa-python text-gold text-xs"></i>
+            <span class="font-medium">Python</span>
           </div>
         </div>
       </section>
 
+      <!-- Altın Bölüm Ayracı -->
       <div class="golden-divider">
-        <span class="golden-divider-icon"><i class="fa-solid fa-seedling"></i></span>
+        <span class="golden-divider-icon">
+          <i class="fa-solid fa-seedling"></i>
+        </span>
       </div>
 
-      <!-- PROJELER -->
-      <section id="projects" class="scroll-mt-24 space-y-6">
+
+      <!-- ================= 3. PROJELERİM (1. FOTOĞRAFTAKİ BİREBİR 3 KART) ================= -->
+      <section id="projects" class="scroll-mt-24 space-y-5">
+        
         <div class="flex items-center gap-2">
-          <h2 class="font-heading text-2xl sm:text-3xl text-gold font-semibold tracking-wide uppercase">
+          <h2 class="font-heading text-2xl text-gold font-semibold tracking-wide uppercase">
             Projelerim
           </h2>
-          <span class="text-gold-glow text-sm">✦</span>
+          <span class="text-gold-glow text-xs">✦</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2">
-          
-          <div class="glass-card rounded-2xl p-3 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="relative w-full h-36 rounded-xl overflow-hidden bg-amethyst-deep flex items-center justify-center border border-gold/10">
-                <i class="fa-solid fa-chart-line text-4xl text-gold/30 group-hover:text-gold/60 transition-colors"></i>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
+
+          <!-- 1. Proje Kartı: Yıldız Tozu -->
+          <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
+            <div class="space-y-2.5">
+              <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
+                <img 
+                  src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=600&q=80" 
+                  alt="Yıldız Tozu" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
+                >
+                <span class="absolute top-2 right-2 w-6 h-6 rounded-full bg-amethyst-deep/80 border border-gold/40 flex items-center justify-center text-gold text-[10px]">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
               </div>
-              <div class="px-1.5 space-y-1.5">
-                <div class="flex items-center gap-2 text-gold font-heading text-lg font-semibold">
-                  <i class="fa-solid fa-chart-simple text-xs"></i>
-                  <h3>Veri Analiz Paneli</h3>
+              <div class="px-1 space-y-1">
+                <div class="flex items-center gap-1.5 text-gold font-heading text-base font-semibold">
+                  <i class="fa-solid fa-display text-[11px]"></i>
+                  <h3>Yıldız Tozu</h3>
                 </div>
-                <p class="text-xs text-gray-300 font-light leading-relaxed">
-                  Büyük veri kümelerini analiz edip görselleştiren etkileşimli dashboard.
+                <p class="text-[11px] text-gray-300 font-light leading-relaxed">
+                  Astronomi severler için web uygulaması.
                 </p>
               </div>
             </div>
-            <div class="pt-4 px-1.5 pb-1">
-              <a href="#projects" class="inline-flex items-center gap-2 text-xs font-semibold text-gold hover:text-gold-soft uppercase tracking-wider py-1 transition-colors">
+            <div class="pt-3 px-1 pb-1">
+              <a href="#projects" class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gold hover:text-gold-soft uppercase tracking-wider transition-colors">
                 <span>İncele</span>
-                <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                <i class="fa-solid fa-arrow-right text-[9px] group-hover:translate-x-1 transition-transform"></i>
               </a>
             </div>
           </div>
 
-          <div class="glass-card rounded-2xl p-3 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="relative w-full h-36 rounded-xl overflow-hidden bg-amethyst-deep flex items-center justify-center border border-gold/10">
-                <i class="fa-solid fa-brain text-4xl text-gold/30 group-hover:text-gold/60 transition-colors"></i>
+          <!-- 2. Proje Kartı: Veri İzleme Paneli -->
+          <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
+            <div class="space-y-2.5">
+              <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" 
+                  alt="Veri İzleme Paneli" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
+                >
+                <span class="absolute top-2 right-2 w-6 h-6 rounded-full bg-amethyst-deep/80 border border-gold/40 flex items-center justify-center text-gold text-[10px]">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
               </div>
-              <div class="px-1.5 space-y-1.5">
-                <div class="flex items-center gap-2 text-gold font-heading text-lg font-semibold">
-                  <i class="fa-solid fa-network-wired text-xs"></i>
-                  <h3>İstatistiksel Modelleme</h3>
+              <div class="px-1 space-y-1">
+                <div class="flex items-center gap-1.5 text-gold font-heading text-base font-semibold">
+                  <i class="fa-solid fa-chart-column text-[11px]"></i>
+                  <h3>Veri İzleme Paneli</h3>
                 </div>
-                <p class="text-xs text-gray-300 font-light leading-relaxed">
-                  Python ile tahminleme algoritmaları ve regresyon modelleri çalışması.
+                <p class="text-[11px] text-gray-300 font-light leading-relaxed">
+                  Gerçek zamanlı veri analiz ve izleme paneli.
                 </p>
               </div>
             </div>
-            <div class="pt-4 px-1.5 pb-1">
-              <a href="#projects" class="inline-flex items-center gap-2 text-xs font-semibold text-gold hover:text-gold-soft uppercase tracking-wider py-1 transition-colors">
+            <div class="pt-3 px-1 pb-1">
+              <a href="#projects" class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gold hover:text-gold-soft uppercase tracking-wider transition-colors">
                 <span>İncele</span>
-                <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                <i class="fa-solid fa-arrow-right text-[9px] group-hover:translate-x-1 transition-transform"></i>
               </a>
             </div>
           </div>
 
-          <div class="glass-card rounded-2xl p-3 flex flex-col justify-between group">
-            <div class="space-y-3">
-              <div class="relative w-full h-36 rounded-xl overflow-hidden bg-amethyst-deep flex items-center justify-center border border-gold/10">
-                <i class="fa-solid fa-laptop-code text-4xl text-gold/30 group-hover:text-gold/60 transition-colors"></i>
+          <!-- 3. Proje Kartı: Keşif Rehberi -->
+          <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
+            <div class="space-y-2.5">
+              <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
+                <img 
+                  src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" 
+                  alt="Keşif Rehberi" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
+                >
+                <span class="absolute top-2 right-2 w-6 h-6 rounded-full bg-amethyst-deep/80 border border-gold/40 flex items-center justify-center text-gold text-[10px]">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </span>
               </div>
-              <div class="px-1.5 space-y-1.5">
-                <div class="flex items-center gap-2 text-gold font-heading text-lg font-semibold">
-                  <i class="fa-solid fa-display text-xs"></i>
-                  <h3>Portfolyo Arayüzü</h3>
+              <div class="px-1 space-y-1">
+                <div class="flex items-center gap-1.5 text-gold font-heading text-base font-semibold">
+                  <i class="fa-solid fa-compass text-[11px]"></i>
+                  <h3>Keşif Rehberi</h3>
                 </div>
-                <p class="text-xs text-gray-300 font-light leading-relaxed">
-                  Ametist ve altın tonlarında, geleneksel motiflerle tasarlanmış web deneyimi.
+                <p class="text-[11px] text-gray-300 font-light leading-relaxed">
+                  Seyahat tutkunları için rehber platformu.
                 </p>
               </div>
             </div>
-            <div class="pt-4 px-1.5 pb-1">
-              <a href="#projects" class="inline-flex items-center gap-2 text-xs font-semibold text-gold hover:text-gold-soft uppercase tracking-wider py-1 transition-colors">
+            <div class="pt-3 px-1 pb-1">
+              <a href="#projects" class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gold hover:text-gold-soft uppercase tracking-wider transition-colors">
                 <span>İncele</span>
-                <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                <i class="fa-solid fa-arrow-right text-[9px] group-hover:translate-x-1 transition-transform"></i>
               </a>
             </div>
           </div>
@@ -391,70 +498,84 @@
         </div>
       </section>
 
+      <!-- Altın Bölüm Ayracı -->
       <div class="golden-divider">
-        <span class="golden-divider-icon"><i class="fa-solid fa-seedling"></i></span>
+        <span class="golden-divider-icon">
+          <i class="fa-solid fa-seedling"></i>
+        </span>
       </div>
 
-      <!-- İLETİŞİM -->
-      <section id="contact" class="scroll-mt-24 space-y-6 pb-24">
+
+      <!-- ================= 4. İLETİŞİM ================= -->
+      <section id="contact" class="scroll-mt-24 space-y-5 pb-16">
+        
         <div class="flex items-center gap-2">
-          <h2 class="font-heading text-2xl sm:text-3xl text-gold font-semibold tracking-wide uppercase">
+          <h2 class="font-heading text-2xl text-gold font-semibold tracking-wide uppercase">
             İletişim
           </h2>
-          <span class="text-gold-glow text-sm">✦</span>
+          <span class="text-gold-glow text-xs">✦</span>
         </div>
 
-        <div class="flex flex-wrap items-center gap-4 pt-1">
+        <!-- İlk Fotoğraftaki Gibi Yatay Sıralı Oval Butonlar -->
+        <div class="flex flex-wrap items-center gap-3.5 pt-1">
+          
+          <!-- E-posta Kopyala Butonu -->
           <button 
             type="button"
             onclick="copyEmailToClipboard('yaren.turan@example.com')"
-            class="glass-card px-5 py-2.5 rounded-full flex items-center gap-3 text-xs text-gray-200 hover:text-gold hover:border-gold transition-all active:scale-95 group shadow-md"
-            title="E-postayı kopyalamak için tıklayın"
+            class="glass-card px-4 py-2 rounded-full flex items-center gap-2.5 text-xs text-gray-200 hover:text-gold hover:border-gold transition-all active:scale-95 group shadow-md"
+            title="Tıkla ve kopyala"
           >
-            <div class="w-6 h-6 rounded-full border border-gold/40 flex items-center justify-center text-gold group-hover:border-gold transition-colors">
-              <i class="fa-regular fa-envelope text-xs"></i>
+            <div class="w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center text-gold group-hover:border-gold transition-colors">
+              <i class="fa-regular fa-envelope text-[11px]"></i>
             </div>
-            <span id="email-address-text" class="font-medium tracking-wide">yaren.turan@example.com</span>
-            <span id="copy-status-pill" class="text-[10px] text-gold/70 group-hover:text-gold uppercase tracking-wider pl-1">
+            <span id="email-address-text" class="font-medium">yaren.turan@example.com</span>
+            <span id="copy-status-pill" class="text-[10px] text-gold/70 group-hover:text-gold uppercase tracking-wider pl-0.5">
               (Kopyala)
             </span>
           </button>
 
+          <!-- LinkedIn -->
           <a 
             href="https://linkedin.com" 
             target="_blank" 
             rel="noopener noreferrer" 
-            class="glass-card px-5 py-2.5 rounded-full flex items-center gap-3 text-xs text-gray-200 hover:text-gold hover:border-gold transition-all group"
+            class="glass-card px-4 py-2 rounded-full flex items-center gap-2 text-xs text-gray-200 hover:text-gold hover:border-gold transition-all group"
           >
-            <div class="w-6 h-6 rounded-full border border-gold/40 flex items-center justify-center text-gold group-hover:border-gold transition-colors">
-              <i class="fa-brands fa-linkedin-in text-xs"></i>
+            <div class="w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center text-gold group-hover:border-gold transition-colors">
+              <i class="fa-brands fa-linkedin-in text-[11px]"></i>
             </div>
-            <span class="font-medium tracking-wide">LinkedIn</span>
+            <span class="font-medium">LinkedIn</span>
           </a>
 
+          <!-- GitHub -->
           <a 
             href="https://github.com/yaren-t" 
             target="_blank" 
             rel="noopener noreferrer" 
-            class="glass-card px-5 py-2.5 rounded-full flex items-center gap-3 text-xs text-gray-200 hover:text-gold hover:border-gold transition-all group"
+            class="glass-card px-4 py-2 rounded-full flex items-center gap-2 text-xs text-gray-200 hover:text-gold hover:border-gold transition-all group"
           >
-            <div class="w-6 h-6 rounded-full border border-gold/40 flex items-center justify-center text-gold group-hover:border-gold transition-colors">
-              <i class="fa-brands fa-github text-xs"></i>
+            <div class="w-5 h-5 rounded-full border border-gold/40 flex items-center justify-center text-gold group-hover:border-gold transition-colors">
+              <i class="fa-brands fa-github text-[11px]"></i>
             </div>
-            <span class="font-medium tracking-wide">GitHub</span>
+            <span class="font-medium">GitHub</span>
           </a>
+
         </div>
 
-        <footer class="pt-16 pb-4 text-center md:text-left text-xs text-gray-400 font-light flex items-center gap-2">
+        <footer class="pt-12 pb-4 text-center md:text-left text-xs text-gray-400 font-light flex items-center gap-2">
           <span>© 2026 Yaren Turan</span>
           <span>•</span>
-          <span>Derin Ametist & Hayat Ağacı</span>
+          <span>Derin Ametist & Hayat Ağacı Teması</span>
         </footer>
+
       </section>
 
     </main>
   </div>
 
+
+  <!-- ================= TOAST BİLDİRİMİ ================= -->
   <div id="toast-notification" class="fixed bottom-6 right-6 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300">
     <div class="px-5 py-3 rounded-xl bg-amethyst-deep border border-gold text-gold text-xs font-medium shadow-2xl flex items-center gap-3">
       <i class="fa-solid fa-circle-check text-gold-glow text-sm"></i>
@@ -462,6 +583,8 @@
     </div>
   </div>
 
+
+  <!-- ================= ETKİLEŞİM & SCROLL-SPY ================= -->
   <script>
     function copyEmailToClipboard(email) {
       const copyPill = document.getElementById('copy-status-pill');
