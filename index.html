@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yaren Turan | Portfolyo</title>
   
-  <!-- Fontlar: Cormorant Garamond (Lüks Serif Başlıklar) & Inter (Okunaklı Gövde) -->
+  <!-- Google Fonts: Cormorant Garamond & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
           colors: {
             amethyst: {
               DEFAULT: '#1f1626',
-              deep: '#140d1a',
+              deep: '#140c1a',
               card: 'rgba(32, 21, 41, 0.72)',
               border: 'rgba(212, 175, 55, 0.2)'
             },
@@ -43,20 +43,28 @@
   </script>
 
   <style>
-    /* Özel İnce Kaydırma Çubuğu */
+    /* İnce Zarif Scrollbar */
     ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #140d1a; }
+    ::-webkit-scrollbar-track { background: #140c1a; }
     ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.35); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.75); }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.8); }
 
-    /* Derin Ametist Yumuşak Geçişli Arka Plan */
+    /* Derin Ametist Arka Plan */
     body {
       background-color: #1f1626;
       background-image: 
-        radial-gradient(circle at 12% 18%, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 88% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(31, 22, 38, 1) 0%, #150e1b 100%);
+        radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.16) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(212, 175, 55, 0.09) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, #1f1626 0%, #150d1b 100%);
       background-attachment: fixed;
+    }
+
+    /* HAYAT AĞACI GÖRSELİ: SİYAH ARKA PLANI TAMAMEN SİLİP IŞILTIYI ENTEGRE EDEN FORMÜL */
+    .sacred-tree-img {
+      mix-blend-mode: screen; /* Siyahı 0 geçirgen yapar, sadece altın ışıltı ametiste karışır */
+      filter: brightness(1.15) contrast(1.1);
+      pointer-events: none;
+      user-select: none;
     }
 
     /* Cam Efektli (Glassmorphic) Kartlar */
@@ -70,7 +78,7 @@
     }
     .glass-card:hover {
       border-color: rgba(212, 175, 55, 0.55);
-      box-shadow: 0 14px 34px -8px rgba(212, 175, 55, 0.16);
+      box-shadow: 0 14px 34px -8px rgba(212, 175, 55, 0.2);
       transform: translateY(-3px);
     }
 
@@ -85,44 +93,44 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Sol Ağaç Menü Düğümleri */
+    /* Ağaç Gövdesindeki Menü Düğümleri */
     .nav-node {
       transition: all 0.3s ease;
       position: relative;
       z-index: 20;
     }
     .nav-node .node-circle {
-      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      border: 1.5px solid rgba(212, 175, 55, 0.5);
       background: #191020;
-      color: rgba(212, 175, 55, 0.75);
-      box-shadow: 0 0 12px rgba(0,0,0,0.8), inset 0 0 4px rgba(212, 175, 55, 0.2);
-      transition: all 0.3s ease;
+      color: rgba(212, 175, 55, 0.8);
+      box-shadow: 0 0 14px rgba(0, 0, 0, 0.85), inset 0 0 6px rgba(212, 175, 55, 0.2);
+      transition: all 0.35s ease;
     }
     .nav-node .node-label {
-      color: rgba(212, 175, 55, 0.65);
+      color: rgba(212, 175, 55, 0.7);
       font-weight: 500;
-      letter-spacing: 0.15em;
-      transition: all 0.3s ease;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      letter-spacing: 0.16em;
+      transition: all 0.35s ease;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
     }
-
-    /* Aktif Düğüm Parıltısı */
+    
+    /* Aktif veya Üzerine Gelinen Düğüm */
     .nav-node.active .node-circle,
     .nav-node:hover .node-circle {
       border-color: #ffd700;
-      background: rgba(212, 175, 55, 0.28);
+      background: rgba(212, 175, 55, 0.35);
       color: #ffd700;
-      box-shadow: 0 0 22px rgba(255, 215, 0, 0.95), inset 0 0 10px rgba(255, 215, 0, 0.5);
+      box-shadow: 0 0 24px rgba(255, 215, 0, 0.95), inset 0 0 10px rgba(255, 215, 0, 0.6);
       transform: scale(1.12);
     }
     .nav-node.active .node-label,
     .nav-node:hover .node-label {
       color: #ffd700;
       font-weight: 600;
-      text-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.85);
     }
 
-    /* Altın İnce Çizgi ve 3 Yapraklı Ayraç */
+    /* Bölüm Ayracı (3 Yaprak Motifli İnce Altın Çizgi) */
     .golden-divider {
       position: relative;
       display: flex;
@@ -136,14 +144,14 @@
       position: absolute;
       left: 0; right: 0; top: 50%;
       height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.4) 15%, rgba(212, 175, 55, 0.4) 85%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.45) 15%, rgba(212, 175, 55, 0.45) 85%, transparent 100%);
     }
     .golden-divider-icon {
       position: relative;
       background: #1f1626;
       padding: 0 16px;
       color: #d4af37;
-      font-size: 14px;
+      font-size: 13px;
       z-index: 2;
     }
   </style>
@@ -151,121 +159,62 @@
 
 <body class="text-gray-200 font-body min-h-screen selection:bg-gold selection:text-amethyst-deep antialiased">
 
-  <!-- ================= ANA TAŞIYICI: MAKSİMUM 1240px İLE FOTOĞRAFTAKİ ZARİF BOYUTLAR ================= -->
+  <!-- ================= ANA TAŞIYICI (1200px Dengeli Görsel Düzen) ================= -->
   <div class="max-w-[1240px] mx-auto flex flex-col lg:flex-row min-h-screen relative">
 
-    <!-- ================= SOL TARAF (SIDEBAR): TAM ENTEGRE HAYAT AĞACI ================= -->
-    <aside class="w-full lg:w-[310px] xl:w-[330px] lg:h-screen lg:sticky lg:top-0 flex flex-col justify-between items-center py-6 px-4 z-30 border-b lg:border-b-0 lg:border-r border-gold/20">
+    <!-- ================= SOL TARAF (SIDEBAR): İSTEDİĞİNİZ HAYAT AĞACI ================= -->
+    <aside class="w-full lg:w-[320px] xl:w-[340px] lg:h-screen lg:sticky lg:top-0 flex flex-col justify-between items-center py-6 px-3 z-30 border-b lg:border-b-0 lg:border-r border-gold/20">
       
-      <!-- Ağaç ve Dikey Menü Alanı (Dış kutu yok, tamamen şeffaf) -->
-      <div class="relative w-full h-[580px] lg:h-[90vh] max-h-[660px] flex items-center justify-center my-auto">
+      <!-- Ağaç ve Dikey Menü Taşıyıcısı -->
+      <div class="relative w-full h-[620px] lg:h-[94vh] max-h-[720px] flex items-center justify-center my-auto">
         
-        <!-- Şeffaf Altın Hayat Ağacı Vektör Çizimi -->
-        <svg class="absolute inset-0 w-full h-full select-none pointer-events-none drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" viewBox="0 0 300 620" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="goldTreeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fff2b3" />
-              <stop offset="30%" stop-color="#ffd700" />
-              <stop offset="70%" stop-color="#d4af37" />
-              <stop offset="100%" stop-color="#805d15" />
-            </linearGradient>
-            <radialGradient id="canopyAura" cx="42%" cy="18%" r="35%">
-              <stop offset="0%" stop-color="rgba(212,175,55,0.22)" />
-              <stop offset="100%" stop-color="transparent" />
-            </radialGradient>
-          </defs>
+        <!-- Yüklediğiniz Orijinal Hayat Ağacı Görseli (mix-blend-mode ile sıfır siyah kutu) -->
+        <img 
+          src="hayat-agaci.jpg" 
+          alt="Hayat Ağacı" 
+          class="sacred-tree-img absolute inset-0 w-full h-full object-contain"
+          onerror="this.onerror=null; this.src='hayat agaci.jpg';"
+        >
 
-          <!-- Taç Arkası Dairesel Işık -->
-          <circle cx="125" cy="115" r="95" fill="url(#canopyAura)" />
-          <circle cx="125" cy="115" r="88" stroke="#d4af37" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.4" />
-
-          <!-- AĞAÇ KÖKLERİ (Tabanda Yayılan Görkemli Kökler) -->
-          <g stroke="url(#goldTreeGrad)" stroke-linecap="round" opacity="0.9">
-            <path d="M125 500 C115 530 80 560 25 590" stroke-width="2.2" />
-            <path d="M125 505 C110 540 60 575 10 580" stroke-width="1.8" />
-            <path d="M125 510 C115 550 90 585 60 605" stroke-width="1.5" />
-            <path d="M125 515 L125 610" stroke-width="2" />
-            <path d="M125 500 C135 530 170 560 225 590" stroke-width="2.2" />
-            <path d="M125 505 C140 540 190 575 240 580" stroke-width="1.8" />
-            <path d="M125 510 C135 550 160 585 190 605" stroke-width="1.5" />
-            <!-- Kılcal kökler -->
-            <path d="M80 550 Q50 585 25 595" stroke-width="1" opacity="0.6" />
-            <path d="M170 550 Q200 585 225 595" stroke-width="1" opacity="0.6" />
-          </g>
-
-          <!-- AĞAÇ GÖVDESİ (Düğümlerin Arkasından Aşağı İnen Işıltılı Sütun) -->
-          <path d="M125 90 L125 505" stroke="url(#goldTreeGrad)" stroke-width="3" stroke-linecap="round" />
-          <path d="M121 115 C118 240 118 380 121 500" stroke="#ffd700" stroke-width="0.9" opacity="0.6" />
-          <path d="M129 115 C132 240 132 380 129 500" stroke="#ffd700" stroke-width="0.9" opacity="0.6" />
-
-          <!-- AĞAÇ TACI VE DALLAR (Üst Kısım Geometrik & Organik Dallar) -->
-          <g stroke="url(#goldTreeGrad)" stroke-linecap="round" opacity="0.85">
-            <!-- Sol Dallar -->
-            <path d="M125 145 C100 130 65 125 30 150 C50 120 85 108 115 118" stroke-width="1.8" />
-            <path d="M125 115 C95 90 55 85 20 105 C40 78 80 68 115 90" stroke-width="1.6" />
-            <path d="M125 85 C100 60 65 50 35 60 C60 38 95 35 118 65" stroke-width="1.4" />
-            <path d="M125 60 C110 35 85 22 55 24 C80 12 105 14 120 42" stroke-width="1.2" />
-            
-            <!-- Sağ Dallar -->
-            <path d="M125 145 C150 130 185 125 220 150 C200 120 165 108 135 118" stroke-width="1.8" />
-            <path d="M125 115 C155 90 195 85 230 105 C210 78 170 68 135 90" stroke-width="1.6" />
-            <path d="M125 85 C150 60 185 50 215 60 C190 38 155 35 132 65" stroke-width="1.4" />
-            <path d="M125 60 C140 35 165 22 195 24 C170 12 145 14 130 42" stroke-width="1.2" />
-          </g>
-
-          <!-- Altın Parıltı Noktaları -->
-          <g fill="#ffd700" opacity="0.9">
-            <circle cx="30" cy="150" r="2.5" />
-            <circle cx="20" cy="105" r="2.8" />
-            <circle cx="35" cy="60" r="2.2" />
-            <circle cx="55" cy="24" r="2.2" />
-            <circle cx="125" cy="12" r="3" />
-            <circle cx="195" cy="24" r="2.2" />
-            <circle cx="215" cy="60" r="2.2" />
-            <circle cx="230" cy="105" r="2.8" />
-            <circle cx="220" cy="150" r="2.5" />
-          </g>
-        </svg>
-
-        <!-- DİKEY MENÜ BUTONLARI (Gövde Üzerine Milimetrik Hizalı) -->
-        <nav id="tree-nav" class="absolute inset-y-0 left-0 right-0 flex flex-col justify-around py-16 pointer-events-auto">
+        <!-- DİKEY MENÜ BOĞUMLARI (Ağacın Gövdesine Milimetrik Hizalı) -->
+        <nav id="tree-nav" class="absolute inset-0 flex flex-col justify-between items-start pointer-events-auto" style="top: 28%; bottom: 22%;">
           
           <!-- 1. Ana Sayfa -->
-          <a href="#hero" class="nav-node active flex items-center group cursor-pointer pl-6 sm:pl-8 lg:pl-10" data-target="hero">
-            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+          <a href="#hero" class="nav-node active flex items-center group cursor-pointer w-full pl-7 sm:pl-9 lg:pl-10" data-target="hero">
+            <div class="node-circle w-10 h-10 rounded-full flex items-center justify-center shrink-0">
               <i class="fa-solid fa-house text-xs"></i>
             </div>
-            <span class="node-label ml-4 text-xs tracking-wider uppercase font-medium">
+            <span class="node-label ml-3.5 text-xs tracking-wider uppercase">
               Ana Sayfa
             </span>
           </a>
 
           <!-- 2. Hakkımda -->
-          <a href="#about" class="nav-node flex items-center group cursor-pointer pl-6 sm:pl-8 lg:pl-10" data-target="about">
-            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+          <a href="#about" class="nav-node flex items-center group cursor-pointer w-full pl-7 sm:pl-9 lg:pl-10" data-target="about">
+            <div class="node-circle w-10 h-10 rounded-full flex items-center justify-center shrink-0">
               <i class="fa-solid fa-user text-xs"></i>
             </div>
-            <span class="node-label ml-4 text-xs tracking-wider uppercase font-medium">
+            <span class="node-label ml-3.5 text-xs tracking-wider uppercase">
               Hakkımda
             </span>
           </a>
 
           <!-- 3. Projeler -->
-          <a href="#projects" class="nav-node flex items-center group cursor-pointer pl-6 sm:pl-8 lg:pl-10" data-target="projects">
-            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+          <a href="#projects" class="nav-node flex items-center group cursor-pointer w-full pl-7 sm:pl-9 lg:pl-10" data-target="projects">
+            <div class="node-circle w-10 h-10 rounded-full flex items-center justify-center shrink-0">
               <i class="fa-solid fa-briefcase text-xs"></i>
             </div>
-            <span class="node-label ml-4 text-xs tracking-wider uppercase font-medium">
+            <span class="node-label ml-3.5 text-xs tracking-wider uppercase">
               Projeler
             </span>
           </a>
 
           <!-- 4. İletişim -->
-          <a href="#contact" class="nav-node flex items-center group cursor-pointer pl-6 sm:pl-8 lg:pl-10" data-target="contact">
-            <div class="node-circle w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+          <a href="#contact" class="nav-node flex items-center group cursor-pointer w-full pl-7 sm:pl-9 lg:pl-10" data-target="contact">
+            <div class="node-circle w-10 h-10 rounded-full flex items-center justify-center shrink-0">
               <i class="fa-solid fa-envelope text-xs"></i>
             </div>
-            <span class="node-label ml-4 text-xs tracking-wider uppercase font-medium">
+            <span class="node-label ml-3.5 text-xs tracking-wider uppercase">
               İletişim
             </span>
           </a>
@@ -279,10 +228,9 @@
     <!-- ================= SAĞ TARAF (MAIN): SCROLL EDİLEN İÇERİK ================= -->
     <main class="flex-1 px-6 sm:px-12 lg:px-14 py-10 lg:py-16 space-y-16">
 
-      <!-- ================= 1. HERO (GİRİŞ) ================= -->
+      <!-- ================= 1. BÖLÜM: HERO (GİRİŞ) ================= -->
       <section id="hero" class="scroll-mt-16 flex flex-col md:flex-row items-center justify-between gap-8 pt-4">
         
-        <!-- Yazı Alanı -->
         <div class="flex-1 space-y-4 text-center md:text-left">
           
           <div class="inline-flex items-center gap-1.5 text-xs text-gold font-medium tracking-wider">
@@ -312,14 +260,11 @@
 
         <!-- Profil Fotoğrafı (Altın Yörüngeli) -->
         <div class="relative w-44 h-44 sm:w-52 sm:h-52 shrink-0 flex items-center justify-center">
-          <!-- Dönen Kesikli Çember -->
           <div class="absolute inset-0 rounded-full orbit-ring"></div>
           
-          <!-- Yörüngedeki Altın Yıldızlar -->
           <div class="absolute top-2 right-6 w-2.5 h-2.5 rounded-full bg-gold drop-shadow-[0_0_8px_#ffd700]"></div>
           <div class="absolute bottom-4 left-3 w-2 h-2 rounded-full bg-gold drop-shadow-[0_0_8px_#ffd700]"></div>
 
-          <!-- İç Fotoğraf Çemberi -->
           <div class="w-36 h-36 sm:w-42 sm:h-42 rounded-full overflow-hidden border-2 border-gold/50 p-1 bg-amethyst-deep flex items-center justify-center">
             <img 
               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" 
@@ -331,7 +276,7 @@
         </div>
       </section>
 
-      <!-- Altın Bölüm Ayracı (3 Yaprak Motifli) -->
+      <!-- Altın Bölüm Ayracı -->
       <div class="golden-divider">
         <span class="golden-divider-icon">
           <i class="fa-solid fa-seedling"></i>
@@ -339,7 +284,7 @@
       </div>
 
 
-      <!-- ================= 2. HAKKIMDA ================= -->
+      <!-- ================= 2. BÖLÜM: HAKKIMDA ================= -->
       <section id="about" class="scroll-mt-24 space-y-5">
         
         <div class="flex items-center gap-2">
@@ -353,7 +298,7 @@
           Yazılım geliştirme, problem çözme ve yeni teknolojiler öğrenmeye büyük ilgi duyuyorum. Modern ve kullanıcı dostu dijital deneyimler oluşturmak benim için bir tutku. İstatistiksel düşünce disiplinini web teknolojileri ile bir araya getiriyorum.
         </p>
 
-        <!-- Teknoloji Rozetleri (İlk Fotoğraftaki Gibi Yatay Sıralı) -->
+        <!-- Rozetler -->
         <div class="flex flex-wrap gap-2.5 pt-1">
           <div class="glass-card px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs text-gray-200 hover:text-gold transition-colors">
             <i class="fa-solid fa-bolt text-gold text-xs"></i>
@@ -390,7 +335,7 @@
       </div>
 
 
-      <!-- ================= 3. PROJELERİM (1. FOTOĞRAFTAKİ BİREBİR 3 KART) ================= -->
+      <!-- ================= 3. BÖLÜM: PROJELERİM (İLK FOTOĞRAFTAKİ 3 KART) ================= -->
       <section id="projects" class="scroll-mt-24 space-y-5">
         
         <div class="flex items-center gap-2">
@@ -402,7 +347,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
 
-          <!-- 1. Proje Kartı: Yıldız Tozu -->
+          <!-- 1. Yıldız Tozu -->
           <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
             <div class="space-y-2.5">
               <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
@@ -433,7 +378,7 @@
             </div>
           </div>
 
-          <!-- 2. Proje Kartı: Veri İzleme Paneli -->
+          <!-- 2. Veri İzleme Paneli -->
           <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
             <div class="space-y-2.5">
               <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
@@ -464,7 +409,7 @@
             </div>
           </div>
 
-          <!-- 3. Proje Kartı: Keşif Rehberi -->
+          <!-- 3. Keşif Rehberi -->
           <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
             <div class="space-y-2.5">
               <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
@@ -506,7 +451,7 @@
       </div>
 
 
-      <!-- ================= 4. İLETİŞİM ================= -->
+      <!-- ================= 4. BÖLÜM: İLETİŞİM ================= -->
       <section id="contact" class="scroll-mt-24 space-y-5 pb-16">
         
         <div class="flex items-center gap-2">
@@ -516,10 +461,9 @@
           <span class="text-gold-glow text-xs">✦</span>
         </div>
 
-        <!-- İlk Fotoğraftaki Gibi Yatay Sıralı Oval Butonlar -->
         <div class="flex flex-wrap items-center gap-3.5 pt-1">
           
-          <!-- E-posta Kopyala Butonu -->
+          <!-- E-posta Kopyala -->
           <button 
             type="button"
             onclick="copyEmailToClipboard('yaren.turan@example.com')"
