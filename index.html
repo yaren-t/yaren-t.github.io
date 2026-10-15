@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yaren Turan | Portfolyo</title>
   
+  <!-- Google Fonts: Cormorant Garamond & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome İkonları -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -39,11 +43,13 @@
   </script>
 
   <style>
+    /* İnce Zarif Scrollbar */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #140c1a; }
     ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.35); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.8); }
 
+    /* Derin Ametist Arka Plan */
     body {
       background-color: #1f1626;
       background-image: 
@@ -53,16 +59,27 @@
       background-attachment: fixed;
     }
 
-    /* Sol Ağaç Görseli: Siyahı pürüzsüz yok eden, yapıştırma durmayan orantı */
+    /* ================= SOL PANEL ================= */
+
+    /* Sabit derin ametist zemin + sağ içerikle kaynaşan yumuşak geçiş */
+    .tree-sidebar {
+      background-color: #1f1626;
+      box-shadow:
+        inset -18px 0 30px -24px rgba(0, 0, 0, 0.55), /* sağ kenarda ince iç gölge */
+        14px 0 40px -6px rgba(31, 22, 38, 0.95);       /* sağ içeriğe doğru eriyen ametist geçiş */
+    }
+
+    /* Hayat ağacı görseli: arka plan mutlak siyaha çekilir, screen ile tamamen saydamlaşır */
     .sacred-tree-img {
       mix-blend-mode: screen;
-      filter: contrast(1.4) brightness(1.1) saturate(1.1);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 65%, transparent 98%);
-      mask-image: radial-gradient(ellipse at center, black 65%, transparent 98%);
+      filter: contrast(1.75) brightness(1.1) saturate(1.15);
+      -webkit-mask-image: radial-gradient(ellipse 80% 85% at 50% 50%, black 45%, transparent 95%);
+              mask-image: radial-gradient(ellipse 80% 85% at 50% 50%, black 45%, transparent 95%);
       pointer-events: none;
       user-select: none;
     }
 
+    /* Navigasyon düğümü: tam satır, dikeyde verilen top % noktasına ortalanır */
     .nav-node {
       position: absolute;
       left: 0;
@@ -73,6 +90,7 @@
       cursor: pointer;
     }
 
+    /* Yuvarlak ikon: ağacın dikey gövdesinin tam üstünde */
     .nav-node .node-circle {
       position: absolute;
       left: 50%;
@@ -91,6 +109,7 @@
       transition: all 0.35s ease;
     }
 
+    /* Metin: ikonun sağında, koyu ametist yarı saydam zemin üzerinde */
     .nav-node .node-label {
       position: absolute;
       left: calc(50% + 32px);
@@ -112,6 +131,7 @@
       transition: all 0.35s ease;
     }
 
+    /* Aktif veya üzerine gelinen düğüm */
     .nav-node.active .node-circle,
     .nav-node:hover .node-circle {
       border-color: #ffd700;
@@ -128,6 +148,9 @@
       text-shadow: 0 0 12px rgba(212, 175, 55, 0.85), 0 2px 8px rgba(0, 0, 0, 0.9);
     }
 
+    /* ================= SAĞ TARAF (değişmedi) ================= */
+
+    /* Cam Efektli (Glassmorphic) Kartlar */
     .glass-card {
       background: rgba(30, 20, 38, 0.65);
       backdrop-filter: blur(16px);
@@ -142,6 +165,7 @@
       transform: translateY(-3px);
     }
 
+    /* Profil Dış Yörünge Halkası */
     .orbit-ring {
       border: 1.5px dashed rgba(212, 175, 55, 0.6);
       box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
@@ -152,6 +176,7 @@
       to { transform: rotate(360deg); }
     }
 
+    /* Bölüm Ayracı (3 Yaprak Motifli İnce Altın Çizgi) */
     .golden-divider {
       position: relative;
       display: flex;
@@ -180,21 +205,23 @@
 
 <body class="text-gray-200 font-body min-h-screen selection:bg-gold selection:text-amethyst-deep antialiased">
 
-  <!-- ================= Orijinal Ferah İki Sütunlu Yerleşim ================= -->
-  <div class="max-w-[1340px] mx-auto flex flex-col lg:flex-row min-h-screen relative">
+  <!-- ================= ANA TAŞIYICI ================= -->
+  <div class="max-w-[1240px] mx-auto flex flex-col lg:flex-row min-h-screen relative">
 
-    <!-- SOL TARAF: HAYAT AĞACI -->
-    <aside class="w-full lg:w-[32%] xl:w-[30%] lg:h-screen lg:sticky lg:top-0 flex items-stretch justify-center z-30">
+    <!-- ================= SOL TARAF (SIDEBAR): HAYAT AĞACI ================= -->
+    <aside class="tree-sidebar w-full lg:w-[34%] lg:h-screen lg:sticky lg:top-0 flex items-stretch justify-center z-30 border-b lg:border-b-0 lg:border-r border-gold/5">
       
-      <div class="relative w-full h-full min-h-[620px] flex items-center justify-center">
+      <!-- Ağaç ve Menü Taşıyıcısı: ekstra zemin rengi yok, doğrudan #1f1626 üzerinde -->
+      <div class="relative w-full h-full min-h-[620px]">
         
+        <!-- Hayat Ağacı -->
         <img 
           src="hayat-agaci.jpg" 
           alt="Hayat Ağacı" 
           class="sacred-tree-img absolute inset-0 w-full h-full object-contain"
-          onerror="this.onerror=null; this.src='hayat agaci.jpg';"
         >
 
+        <!-- Dikey Menü: düğümler gövdenin düz kısmına dizili -->
         <nav id="tree-nav" class="absolute inset-0">
           
           <a href="#hero" class="nav-node active" data-target="hero" style="top: 42%;">
@@ -222,13 +249,15 @@
 
     </aside>
 
-    <!-- SAĞ TARAF: MAIN CONTENT -->
+
+    <!-- ================= SAĞ TARAF (MAIN): SCROLL EDİLEN İÇERİK ================= -->
     <main class="flex-1 px-6 sm:px-12 lg:px-14 py-10 lg:py-16 space-y-16">
 
-      <!-- HERO -->
+      <!-- ================= 1. BÖLÜM: HERO (GİRİŞ) ================= -->
       <section id="hero" class="scroll-mt-16 flex flex-col md:flex-row items-center justify-between gap-8 pt-4">
         
         <div class="flex-1 space-y-4 text-center md:text-left">
+          
           <div class="inline-flex items-center gap-1.5 text-xs text-gold font-medium tracking-wider">
             <span>Merhaba, ben</span>
             <span class="text-gold-glow">✦</span>
@@ -254,8 +283,10 @@
           </div>
         </div>
 
+        <!-- Profil Fotoğrafı (Altın Yörüngeli) -->
         <div class="relative w-44 h-44 sm:w-52 sm:h-52 shrink-0 flex items-center justify-center">
           <div class="absolute inset-0 rounded-full orbit-ring"></div>
+          
           <div class="absolute top-2 right-6 w-2.5 h-2.5 rounded-full bg-gold drop-shadow-[0_0_8px_#ffd700]"></div>
           <div class="absolute bottom-4 left-3 w-2 h-2 rounded-full bg-gold drop-shadow-[0_0_8px_#ffd700]"></div>
 
@@ -270,12 +301,17 @@
         </div>
       </section>
 
+      <!-- Altın Bölüm Ayracı -->
       <div class="golden-divider">
-        <span class="golden-divider-icon"><i class="fa-solid fa-seedling"></i></span>
+        <span class="golden-divider-icon">
+          <i class="fa-solid fa-seedling"></i>
+        </span>
       </div>
 
-      <!-- HAKKIMDA -->
+
+      <!-- ================= 2. BÖLÜM: HAKKIMDA ================= -->
       <section id="about" class="scroll-mt-24 space-y-5">
+        
         <div class="flex items-center gap-2">
           <h2 class="font-heading text-2xl text-gold font-semibold tracking-wide uppercase">
             Hakkımda
@@ -287,6 +323,7 @@
           Yazılım geliştirme, problem çözme ve yeni teknolojiler öğrenmeye büyük ilgi duyuyorum. Modern ve kullanıcı dostu dijital deneyimler oluşturmak benim için bir tutku. İstatistiksel düşünce disiplinini web teknolojileri ile bir araya getiriyorum.
         </p>
 
+        <!-- Rozetler -->
         <div class="flex flex-wrap gap-2.5 pt-1">
           <div class="glass-card px-3.5 py-1.5 rounded-lg flex items-center gap-2 text-xs text-gray-200 hover:text-gold transition-colors">
             <i class="fa-solid fa-bolt text-gold text-xs"></i>
@@ -315,12 +352,17 @@
         </div>
       </section>
 
+      <!-- Altın Bölüm Ayracı -->
       <div class="golden-divider">
-        <span class="golden-divider-icon"><i class="fa-solid fa-seedling"></i></span>
+        <span class="golden-divider-icon">
+          <i class="fa-solid fa-seedling"></i>
+        </span>
       </div>
 
-      <!-- PROJELERİM -->
+
+      <!-- ================= 3. BÖLÜM: PROJELERİM ================= -->
       <section id="projects" class="scroll-mt-24 space-y-5">
+        
         <div class="flex items-center gap-2">
           <h2 class="font-heading text-2xl text-gold font-semibold tracking-wide uppercase">
             Projelerim
@@ -330,6 +372,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
 
+          <!-- 1. Yıldız Tozu -->
           <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
             <div class="space-y-2.5">
               <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
@@ -360,6 +403,7 @@
             </div>
           </div>
 
+          <!-- 2. Veri İzleme Paneli -->
           <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
             <div class="space-y-2.5">
               <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
@@ -390,6 +434,7 @@
             </div>
           </div>
 
+          <!-- 3. Keşif Rehberi -->
           <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
             <div class="space-y-2.5">
               <div class="relative w-full h-32 rounded-xl overflow-hidden bg-amethyst-deep">
@@ -423,12 +468,17 @@
         </div>
       </section>
 
+      <!-- Altın Bölüm Ayracı -->
       <div class="golden-divider">
-        <span class="golden-divider-icon"><i class="fa-solid fa-seedling"></i></span>
+        <span class="golden-divider-icon">
+          <i class="fa-solid fa-seedling"></i>
+        </span>
       </div>
 
-      <!-- İLETİŞİM -->
+
+      <!-- ================= 4. BÖLÜM: İLETİŞİM ================= -->
       <section id="contact" class="scroll-mt-24 space-y-5 pb-16">
+        
         <div class="flex items-center gap-2">
           <h2 class="font-heading text-2xl text-gold font-semibold tracking-wide uppercase">
             İletişim
@@ -437,6 +487,8 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-3.5 pt-1">
+          
+          <!-- E-posta Kopyala -->
           <button 
             type="button"
             onclick="copyEmailToClipboard('yaren.turan@example.com')"
@@ -452,6 +504,7 @@
             </span>
           </button>
 
+          <!-- LinkedIn -->
           <a 
             href="https://linkedin.com" 
             target="_blank" 
@@ -464,6 +517,7 @@
             <span class="font-medium">LinkedIn</span>
           </a>
 
+          <!-- GitHub -->
           <a 
             href="https://github.com/yaren-t" 
             target="_blank" 
@@ -475,6 +529,7 @@
             </div>
             <span class="font-medium">GitHub</span>
           </a>
+
         </div>
 
         <footer class="pt-12 pb-4 text-center md:text-left text-xs text-gray-400 font-light flex items-center gap-2">
@@ -482,11 +537,14 @@
           <span>•</span>
           <span>Derin Ametist & Hayat Ağacı Teması</span>
         </footer>
+
       </section>
 
     </main>
   </div>
 
+
+  <!-- ================= TOAST BİLDİRİMİ ================= -->
   <div id="toast-notification" class="fixed bottom-6 right-6 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300">
     <div class="px-5 py-3 rounded-xl bg-amethyst-deep border border-gold text-gold text-xs font-medium shadow-2xl flex items-center gap-3">
       <i class="fa-solid fa-circle-check text-gold-glow text-sm"></i>
@@ -494,6 +552,8 @@
     </div>
   </div>
 
+
+  <!-- ================= ETKİLEŞİM & SCROLL-SPY ================= -->
   <script>
     function copyEmailToClipboard(email) {
       const copyPill = document.getElementById('copy-status-pill');
