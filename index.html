@@ -1,21 +1,3 @@
-Ekran görüntüsündeki siyah kutunun asıl nedeni şu: `mix-blend-mode: screen` önceki kodda zaten vardı, ama işe yaramıyordu. Sol panel `sticky` ve `z-30` olduğu için kendi ayrı katmanını oluşturuyor. Görsel bu yüzden sayfanın ametist arka planıyla değil, panelin içindeki boş (şeffaf) zeminle karışıyordu. Siyah zemin de olduğu gibi görünüyordu.
-
-**Yaptığım düzeltmeler (sadece sol panel ve ona ait CSS değişti):**
-
-1. **Siyah kutu:**
-   - Sol panele `background: inherit` verdim. Panel artık sayfanın ametist arka planını aynen alıyor, böylece `screen` görselin siyah zeminini gerçekten saydam yapabiliyor.
-   - Görseldeki siyah zemin tam siyah değil, koyu mor. `contrast` filtresiyle onu tam siyaha çektim; böylece zeminden hiç iz kalmıyor.
-   - İstediğiniz yumuşak kenar maskesini ekledim. Tek fark: `circle` yerine `ellipse` kullandım. Panel uzun ve dar olduğu için `circle` ağacın tepesini ve köklerini de soldururdu.
-2. **Butonlar ve yazılar:**
-   - Yuvarlak ikonlar `left: 50%; transform: translateX(-50%)` ile tam gövdenin üstünde ortalanıyor.
-   - Dört düğümü gövdenin dal ve kök olmayan düz kısmına dizdim.
-   - Yazılar ikonun sağında, yarı saydam koyu ametist bir zemin üzerinde ve istediğiniz `text-shadow` ile duruyor.
-   - Sol panelin genişliği `lg:w-[34%]` oldu.
-3. **Diğer bölümler:** Hero, Hakkımda, Projeler, İletişim ve JavaScript kodu birebir aynı kaldı.
-
-Bu kod `hayat-agaci.jpg` dosyasının repoda `index.html` ile aynı klasörde olduğunu varsayıyor. Kodu bu kez tarayıcıda test edemedim; yükledikten sonra bir kontrol etmeniz iyi olur.
-
-```html
 <!DOCTYPE html>
 <html lang="tr" class="scroll-smooth">
 <head>
@@ -79,19 +61,20 @@ Bu kod `hayat-agaci.jpg` dosyasının repoda `index.html` ile aynı klasörde ol
 
     /* ================= SOL PANEL ================= */
 
-    /* Sticky panel kendi katmanını oluşturduğu için, body'nin sabit (fixed) arka planını
-       birebir miras alıyoruz. Böylece mix-blend-mode: screen ametist zeminle karışır. */
+    /* Sabit derin ametist zemin + sağ içerikle kaynaşan yumuşak geçiş */
     .tree-sidebar {
-      background: inherit;
+      background-color: #1f1626;
+      box-shadow:
+        inset -18px 0 30px -24px rgba(0, 0, 0, 0.55), /* sağ kenarda ince iç gölge */
+        14px 0 40px -6px rgba(31, 22, 38, 0.95);       /* sağ içeriğe doğru eriyen ametist geçiş */
     }
 
-    /* Hayat ağacı görseli: siyah zemin tamamen saydamlaşır, kenarlar yumuşakça kaybolur */
+    /* Hayat ağacı görseli: arka plan mutlak siyaha çekilir, screen ile tamamen saydamlaşır */
     .sacred-tree-img {
       mix-blend-mode: screen;
-      /* Koyu mor-siyah zemini tam siyaha çeker (screen'de siyah = görünmez) */
-      filter: contrast(1.3) brightness(1.08) saturate(1.1);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 65%, transparent 100%);
-              mask-image: radial-gradient(ellipse at center, black 65%, transparent 100%);
+      filter: contrast(1.75) brightness(1.1) saturate(1.15);
+      -webkit-mask-image: radial-gradient(ellipse 80% 85% at 50% 50%, black 45%, transparent 95%);
+              mask-image: radial-gradient(ellipse 80% 85% at 50% 50%, black 45%, transparent 95%);
       pointer-events: none;
       user-select: none;
     }
@@ -226,12 +209,12 @@ Bu kod `hayat-agaci.jpg` dosyasının repoda `index.html` ile aynı klasörde ol
   <div class="max-w-[1240px] mx-auto flex flex-col lg:flex-row min-h-screen relative">
 
     <!-- ================= SOL TARAF (SIDEBAR): HAYAT AĞACI ================= -->
-    <aside class="tree-sidebar w-full lg:w-[34%] lg:h-screen lg:sticky lg:top-0 flex items-stretch justify-center z-30 border-b lg:border-b-0 lg:border-r border-gold/20">
+    <aside class="tree-sidebar w-full lg:w-[34%] lg:h-screen lg:sticky lg:top-0 flex items-stretch justify-center z-30 border-b lg:border-b-0 lg:border-r border-gold/5">
       
-      <!-- Ağaç ve Menü Taşıyıcısı: panel boyunca tam boy -->
+      <!-- Ağaç ve Menü Taşıyıcısı: ekstra zemin rengi yok, doğrudan #1f1626 üzerinde -->
       <div class="relative w-full h-full min-h-[620px]">
         
-        <!-- Hayat Ağacı (siyah zemin screen ile saydam, kenarlar maske ile yumuşak) -->
+        <!-- Hayat Ağacı -->
         <img 
           src="hayat-agaci.jpg" 
           alt="Hayat Ağacı" 
@@ -640,8 +623,3 @@ Bu kod `hayat-agaci.jpg` dosyasının repoda `index.html` ile aynı klasörde ol
   </script>
 </body>
 </html>
-```
-
-**İnce ayar gerekirse:**
-- **Düğümler gövdenin biraz solunda kalırsa:** Ağacın gövdesi görselde tam ortada değil, biraz sağda. `.nav-node .node-circle` içindeki `left: 50%` değerini `left: 51.5%` yapın. Yazılar için de `.node-label` içindeki `calc(50% + 32px)` değerini aynı oranda değiştirin.
-- **Düğümler dallara ya da köklere değerse:** HTML'deki `style="top: 42%"` … `78%` değerleriyle oynayarak yukarı ya da aşağı kaydırabilirsiniz.
